@@ -24,6 +24,7 @@ public class Main extends Application{
 
         Rectangle body = new Rectangle(wid / 2 - 10, hig - 10, 20, 90);
         body.setFill(Color.BLACK);
+        body.setRotate(30);
         pane.getChildren().add(body);
 
         Image img = new Image("wang.png");
