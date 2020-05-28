@@ -37,6 +37,8 @@ public class Main extends Application{
             double side1 = Math.abs(e.getY() - centerY);
             double centerX = body.getX() + (body.getWidth() / 2);
             double side2 = Math.abs(e.getX() - centerX);
+            double angle = Math.asin(side2 / side1);
+            body.setRotate(angle);
             System.out.printf("side1: %f, side2: %f\n", side1, side2);
         });
 
