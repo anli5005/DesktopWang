@@ -37,9 +37,25 @@ public class Main extends Application{
             double side1 = Math.abs(e.getY() - centerY);
             double centerX = body.getX() + (body.getWidth() / 2);
             double side2 = Math.abs(e.getX() - centerX);
-            double angle = Math.asin(side2 / side1);
-            body.setRotate(angle);
-            System.out.printf("side1: %f, side2: %f\n", side1, side2);
+            // if(side1 < side2){
+            //     double temp;
+            //     temp = side1;
+            //     side1 = side2;
+            //     side2 = temp;
+            // }
+            if(side1 != 0){
+                double angle = Math.asin(side2 / side1);
+                angle *= -100;
+                System.out.printf("side1: %f, side2: %f, angle: %f\n", side1, side2, angle);
+                if(e.getX() > centerX && e.getY() < centerY){
+                    body.setRotate(angle);
+                    imgV.setRotate(angle);
+                }
+                else if(e.getX() < centerX && e.getY() < centerY){
+                    body.setRotate(angle * -1);
+                    imgV.setRotate(angle * -1);
+                }
+            }
         });
 
         ps.initStyle(StageStyle.TRANSPARENT);
