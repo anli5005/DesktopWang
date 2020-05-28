@@ -22,6 +22,10 @@ public class Main extends Application{
         double wid = WIDTH / 2.75 / 620 * 100;
         double hig = HEIGHT / 781 * 100;
 
+        Rectangle screen = new Rectangle(-100, -100, WIDTH, HEIGHT);
+        screen.setFill(Color.WHITE);
+        pane.getChildren().add(screen);
+
         Rectangle body = new Rectangle(wid / 2 - 10, hig - 10, 20, 90);
         body.setFill(Color.BLACK);
         pane.getChildren().add(body);
@@ -32,7 +36,7 @@ public class Main extends Application{
         imgV.setFitHeight(HEIGHT / 781 * 100);
         pane.getChildren().add(imgV);
 
-        pane.setOnMouseMoved(e ->{
+        screen.setOnMouseMoved(e ->{
             double centerY = body.getY() + (body.getHeight() / 2);
             double side1 = Math.abs(e.getY() - centerY);
             double centerX = body.getX() + (body.getWidth() / 2);
@@ -43,15 +47,29 @@ public class Main extends Application{
             //     side1 = side2;
             //     side2 = temp;
             // }
-            if(side1 != 0){
-                double angle = Math.asin(side2 / side1);
-                angle *= -100;
+            if(side1 != 0 && side2 != 0){
+                double angle = 0;
+                if(side1 > side2){
+                    angle = Math.asin(side2 / side1);
+                }
+                else{
+                    angle = Math.asin(side1 / side2);
+                }
+                angle *= 100;
                 System.out.printf("side1: %f, side2: %f, angle: %f\n", side1, side2, angle);
                 if(e.getX() > centerX && e.getY() < centerY){
+                    body.setRotate(angle * -1);
+                    imgV.setRotate(angle * -1);
+                }
+                else if(e.getX() < centerX && e.getY() < centerY){
                     body.setRotate(angle);
                     imgV.setRotate(angle);
                 }
-                else if(e.getX() < centerX && e.getY() < centerY){
+                else if(e.getX() > centerX && e.getY() > centerY){
+                    body.setRotate(angle);
+                    imgV.setRotate(angle);
+                }
+                else if(e.getX() < centerX && e.getY() > centerY){
                     body.setRotate(angle * -1);
                     imgV.setRotate(angle * -1);
                 }
@@ -59,7 +77,7 @@ public class Main extends Application{
         });
 
         ps.initStyle(StageStyle.TRANSPARENT);
-        ps.setAlwaysOnTop(true);
+        //ps.setAlwaysOnTop(true);
         Scene scene = new Scene(pane, 500, 500);
         scene.setFill(Color.TRANSPARENT);
         ps.setTitle("DesktopWang");
