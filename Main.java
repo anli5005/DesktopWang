@@ -24,7 +24,6 @@ public class Main extends Application{
 
         Rectangle body = new Rectangle(wid / 2 - 10, hig - 10, 20, 90);
         body.setFill(Color.BLACK);
-        body.setRotate(30);
         pane.getChildren().add(body);
 
         Image img = new Image("wang.png");
@@ -33,11 +32,17 @@ public class Main extends Application{
         imgV.setFitHeight(HEIGHT / 781 * 100);
         pane.getChildren().add(imgV);
 
-        
+        pane.setOnMouseMoved(e ->{
+            double centerY = body.getY() + (body.getHeight() / 2);
+            double side1 = Math.abs(e.getY() - centerY);
+            double centerX = body.getX() + (body.getWidth() / 2);
+            double side2 = Math.abs(e.getX() - centerX);
+            System.out.printf("side1: %f, side2: %f\n", side1, side2);
+        });
 
         ps.initStyle(StageStyle.TRANSPARENT);
         ps.setAlwaysOnTop(true);
-        Scene scene = new Scene(pane);
+        Scene scene = new Scene(pane, 500, 500);
         scene.setFill(Color.TRANSPARENT);
         ps.setTitle("DesktopWang");
         ps.setScene(scene);
