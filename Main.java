@@ -15,14 +15,12 @@ public class Main extends Application{
         Pane pane = new Pane();
         Image img = new Image("wang.png");
         ImageView imgV = new ImageView(img);
-        imgV.setFitWidth(100);
-        imgV.setFitHeight(100);  
-        imgV.setSmooth(true);
         pane.getChildren().add(imgV);
 
         ps.initStyle(StageStyle.TRANSPARENT);
         ps.setAlwaysOnTop(true);
         Scene scene = new Scene(pane);
+        scene.setFill(Color.TRANSPARENT);
         ps.setTitle("DesktopWang");
         ps.setScene(scene);
         ps.show();
