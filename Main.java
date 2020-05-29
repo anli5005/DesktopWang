@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.scene.Group;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.Scene;
@@ -43,51 +44,56 @@ public class Main extends Application{
 
 
         Line body = new Line();
-        body.startXProperty().bind(imgV.fitWidthProperty().divide(2));
-        body.endXProperty().bind(body.startXProperty());
-        body.startYProperty().bind(imgV.fitHeightProperty().add(hig/64));
-        body.endYProperty().bind(body.startYProperty().add(50));
-        body.setStrokeWidth(5);
-        body.setStroke(Color.BLACK);
-
         Line armL = new Line();
-        armL.startXProperty().bind(body.startXProperty());
-        armL.endXProperty().bind(body.startXProperty().subtract(20));
-        armL.startYProperty().bind((body.startYProperty().add(body.endYProperty()).divide(2)));
-        armL.endYProperty().bind(body.endYProperty());
-        armL.setStrokeWidth(5);
-        armL.setStroke(Color.BLACK);
-
         Line armR = new Line();
-        armR.startXProperty().bind(body.startXProperty());
-        armR.endXProperty().bind(body.startXProperty().add(20));
-        armR.startYProperty().bind((body.startYProperty().add(body.endYProperty()).divide(2)));
-        armR.endYProperty().bind(body.endYProperty());
-        armR.setStrokeWidth(5);
-        armR.setStroke(Color.BLACK);
-
         Line legL = new Line();
-        legL.startXProperty().bind(body.startXProperty());
-        legL.endXProperty().bind(body.startXProperty().subtract(20));
-        legL.startYProperty().bind(body.endYProperty());
-        legL.endYProperty().bind(legL.startYProperty().add(50));
-        legL.setStrokeWidth(5);
-        legL.setStroke(Color.BLACK);
-
         Line legR = new Line();
-        legR.startXProperty().bind(body.startXProperty());
-        legR.endXProperty().bind(body.startXProperty().add(20));
-        legR.startYProperty().bind(body.endYProperty());
-        legR.endYProperty().bind(legR.startYProperty().add(50));
-        legR.setStrokeWidth(5);
-        legR.setStroke(Color.BLACK);
 
-        pane.getChildren().add(imgV);
-        pane.getChildren().add(body);
-        pane.getChildren().add(armL);
-        pane.getChildren().add(armR);
-        pane.getChildren().add(legL);
-        pane.getChildren().add(legR);
+        Line[] lines = new Line[]{body, armL, armR, legL, legR};
+        Group wang = new Group();
+        
+        for(int i =0; i < lines.length; i++){
+            Line limb = lines[i];
+            wang.getChildren().add(limb);
+            limb.setStrokeWidth(5);
+            limb.setStroke(Color.BLACK);
+            if(i!=0){
+                limb.startXProperty().bind(body.startXProperty());
+            }else{
+                limb.startXProperty().bind(imgV.fitWidthProperty().divide(2));
+            }
+
+            if(i==0){
+                limb.endXProperty().bind(body.startXProperty());
+            }else if(i==1 || i==3){
+                limb.endXProperty().bind(body.startXProperty().subtract(20));
+            }else{
+                limb.endXProperty().bind(body.startXProperty().add(20));
+            }
+
+            if(i==0){
+                limb.startYProperty().bind(imgV.fitHeightProperty().add(hig/64));
+            }else if(i==1 || i==2){
+                limb.startYProperty().bind((body.startYProperty().add(body.endYProperty()).divide(2)));
+            }else{
+                limb.startYProperty().bind(body.endYProperty());
+            }
+            
+            // if(i==0 || i==3 || i==4){
+            //     limb.endYProperty().bind(body.startYProperty().add(50));
+            // }else{
+            //     limb.endYProperty().bind(body.endYProperty());
+            // }
+
+        }
+        body.endYProperty().bind(body.startYProperty().add(50));
+        armL.endYProperty().bind(body.endYProperty());
+        armR.endYProperty().bind(body.endYProperty());
+        legL.endYProperty().bind(legL.startYProperty().add(50));
+        legR.endYProperty().bind(legR.startYProperty().add(50));
+
+        wang.getChildren().add(imgV);
+        pane.getChildren().add(wang);
         /*screen.setOnMouseMoved(e ->{
             double centerY = body.getY() + (body.getHeight() / 2);
             double side1 = Math.abs(e.getY() - centerY);
