@@ -6,6 +6,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Screen;
@@ -16,27 +17,78 @@ public class Main extends Application{
     public void start(Stage ps) {
         Pane pane = new Pane();
 
+        
+
         Rectangle2D screenBounds = Screen.getPrimary().getBounds();
         final double WIDTH = screenBounds.getWidth();
         final double HEIGHT = screenBounds.getHeight();
         double wid = WIDTH / 2.75 / 620 * 100;
         double hig = HEIGHT / 781 * 100;
 
-        Rectangle screen = new Rectangle(-100, -100, WIDTH, HEIGHT);
+        /*Rectangle screen = new Rectangle(-100, -100, WIDTH, HEIGHT);
         screen.setFill(Color.WHITE);
         pane.getChildren().add(screen);
+        
 
         Rectangle body = new Rectangle(wid / 2 - 10, hig - 10, 20, 90);
         body.setFill(Color.BLACK);
         pane.getChildren().add(body);
+        */
 
         Image img = new Image("wang.png");
         ImageView imgV = new ImageView(img);
-        imgV.setFitWidth(WIDTH / 2.75 / 620 * 100);
-        imgV.setFitHeight(HEIGHT / 781 * 100);
-        pane.getChildren().add(imgV);
+        imgV.setFitWidth(wid);
+        imgV.setFitHeight(hig);
 
-        screen.setOnMouseMoved(e ->{
+
+
+        Line body = new Line();
+        body.startXProperty().bind(imgV.fitWidthProperty().divide(2));
+        body.endXProperty().bind(body.startXProperty());
+        body.startYProperty().bind(imgV.fitHeightProperty().add(hig/64));
+        body.endYProperty().bind(body.startYProperty().add(50));
+        body.setStrokeWidth(5);
+        body.setStroke(Color.BLACK);
+
+        Line armL = new Line();
+        armL.startXProperty().bind(body.startXProperty());
+        armL.endXProperty().bind(body.startXProperty().subtract(20));
+        armL.startYProperty().bind((body.startYProperty().add(body.endYProperty()).divide(2)));
+        armL.endYProperty().bind(body.endYProperty());
+        armL.setStrokeWidth(5);
+        armL.setStroke(Color.BLACK);
+
+        Line armR = new Line();
+        armR.startXProperty().bind(body.startXProperty());
+        armR.endXProperty().bind(body.startXProperty().add(20));
+        armR.startYProperty().bind((body.startYProperty().add(body.endYProperty()).divide(2)));
+        armR.endYProperty().bind(body.endYProperty());
+        armR.setStrokeWidth(5);
+        armR.setStroke(Color.BLACK);
+
+        Line legL = new Line();
+        legL.startXProperty().bind(body.startXProperty());
+        legL.endXProperty().bind(body.startXProperty().subtract(20));
+        legL.startYProperty().bind(body.endYProperty());
+        legL.endYProperty().bind(legL.startYProperty().add(50));
+        legL.setStrokeWidth(5);
+        legL.setStroke(Color.BLACK);
+
+        Line legR = new Line();
+        legR.startXProperty().bind(body.startXProperty());
+        legR.endXProperty().bind(body.startXProperty().add(20));
+        legR.startYProperty().bind(body.endYProperty());
+        legR.endYProperty().bind(legR.startYProperty().add(50));
+        legR.setStrokeWidth(5);
+        legR.setStroke(Color.BLACK);
+
+        pane.getChildren().add(imgV);
+        pane.getChildren().add(body);
+        pane.getChildren().add(armL);
+        pane.getChildren().add(armR);
+        pane.getChildren().add(legL);
+        pane.getChildren().add(legR);
+        /*screen.setOnMouseMoved(e ->{
             double centerY = body.getY() + (body.getHeight() / 2);
             double side1 = Math.abs(e.getY() - centerY);
             double centerX = body.getX() + (body.getWidth() / 2);
@@ -75,10 +127,10 @@ public class Main extends Application{
                 }
             }
         });
-
+        */
         ps.initStyle(StageStyle.TRANSPARENT);
-        //ps.setAlwaysOnTop(true);
-        Scene scene = new Scene(pane, 500, 500);
+        ps.setAlwaysOnTop(true);
+        Scene scene = new Scene(pane);
         scene.setFill(Color.TRANSPARENT);
         ps.setTitle("DesktopWang");
         ps.setScene(scene);
