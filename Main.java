@@ -1,7 +1,7 @@
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.shape.Rectangle;
+//import javafx.scene.shape.Rectangle;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.image.Image;
@@ -17,14 +17,10 @@ public class Main extends Application{
     @Override
     public void start(Stage ps) {
         Pane pane = new Pane();
-
         
-
         Rectangle2D screenBounds = Screen.getPrimary().getBounds();
-        final double WIDTH = screenBounds.getWidth();
-        final double HEIGHT = screenBounds.getHeight();
-        double wid = WIDTH / 2.75 / 620 * 100;
-        double hig = HEIGHT / 781 * 100;
+        final double WIDTH = screenBounds.getWidth(), HEIGHT = screenBounds.getHeight();
+        double wid = WIDTH / 2.75 / 620 * 100, hig = HEIGHT / 781 * 100;
 
         /*Rectangle screen = new Rectangle(-100, -100, WIDTH, HEIGHT);
         screen.setFill(Color.WHITE);
@@ -41,59 +37,45 @@ public class Main extends Application{
         imgV.setFitWidth(wid);
         imgV.setFitHeight(hig);
 
-
-
-        Line body = new Line();
-        Line armL = new Line();
-        Line armR = new Line();
-        Line legL = new Line();
-        Line legR = new Line();
-
-        Line[] lines = new Line[]{body, armL, armR, legL, legR};
+        Line body = new Line(), armL = new Line(), armR = new Line(), legL = new Line(), legR = new Line();
+        Line[] lines = {body, armL, armR, legL, legR};
+        
         Group wang = new Group();
         
-        for(int i =0; i < lines.length; i++){
+        for (int i = 0; i < lines.length; i++) {
+
             Line limb = lines[i];
-            wang.getChildren().add(limb);
             limb.setStrokeWidth(5);
             limb.setStroke(Color.BLACK);
-            if(i!=0){
-                limb.startXProperty().bind(body.startXProperty());
-            }else{
-                limb.startXProperty().bind(imgV.fitWidthProperty().divide(2));
-            }
 
-            if(i==0){
+            limb.startXProperty().bind(imgV.fitWidthProperty().divide(2));
+        
+
+            if (i == 0)
                 limb.endXProperty().bind(body.startXProperty());
-            }else if(i==1 || i==3){
+            else if (i == 1 || i == 3)
                 limb.endXProperty().bind(body.startXProperty().subtract(20));
-            }else{
+            else if (i == 2 || i == 4)
                 limb.endXProperty().bind(body.startXProperty().add(20));
-            }
-
-            if(i==0){
-                limb.startYProperty().bind(imgV.fitHeightProperty().add(hig/64));
-            }else if(i==1 || i==2){
-                limb.startYProperty().bind((body.startYProperty().add(body.endYProperty()).divide(2)));
-            }else{
-                limb.startYProperty().bind(body.endYProperty());
-            }
             
-            // if(i==0 || i==3 || i==4){
-            //     limb.endYProperty().bind(body.startYProperty().add(50));
-            // }else{
-            //     limb.endYProperty().bind(body.endYProperty());
-            // }
+            if (i == 0)
+                limb.startYProperty().bind(imgV.fitHeightProperty().add(hig/64));
+            else if (i == 1 || i == 2)
+                limb.startYProperty().bind((body.startYProperty().add(body.endYProperty()).divide(2)));
+            else if (i == 3 || i == 4) 
+                limb.startYProperty().bind(body.endYProperty());
 
+            if (i == 0 || i == 1 || i == 2)
+                limb.endYProperty().bind(body.startYProperty().add(50));
+            else if (i == 3 || i == 4)
+                limb.endYProperty().bind(body.endYProperty().add(50));
+
+            wang.getChildren().add(limb);
         }
-        body.endYProperty().bind(body.startYProperty().add(50));
-        armL.endYProperty().bind(body.endYProperty());
-        armR.endYProperty().bind(body.endYProperty());
-        legL.endYProperty().bind(legL.startYProperty().add(50));
-        legR.endYProperty().bind(legR.startYProperty().add(50));
 
         wang.getChildren().add(imgV);
         pane.getChildren().add(wang);
+        
         /*screen.setOnMouseMoved(e ->{
             double centerY = body.getY() + (body.getHeight() / 2);
             double side1 = Math.abs(e.getY() - centerY);
