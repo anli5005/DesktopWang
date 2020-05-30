@@ -1,4 +1,4 @@
-package DesktopWang;
+
 
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -16,8 +16,7 @@ import javafx.stage.Screen;
 
 public class Wang extends Pane{
     public Wang(double wid, double hig){
-        Image img = new Image("wang.png");
-        ImageView imgV = new ImageView(img);
+        ImageView imgV = new ImageView(new Image("wang.png"));
         imgV.setFitWidth(wid);
         imgV.setFitHeight(hig);
 
@@ -58,5 +57,6 @@ public class Wang extends Pane{
         }
 
         wang.getChildren().add(imgV);
+        getChildren().add(wang);
     }
 }

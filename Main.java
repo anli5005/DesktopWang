@@ -1,4 +1,4 @@
-package DesktopWang;
+
 
 import javafx.application.Application;
 import javafx.scene.Group;
