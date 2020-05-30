@@ -1,15 +1,11 @@
 
-
 import javafx.application.Application;
-import javafx.scene.Group;
+import javafx.geometry.Bounds;
 import javafx.geometry.Rectangle2D;
-//import javafx.scene.shape.Rectangle;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;  
 import javafx.scene.layout.Pane;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Screen;
@@ -20,11 +16,31 @@ public class Main extends Application{
     public void start(Stage ps) {
         Pane pane = new Pane();
         
+
         Rectangle2D screenBounds = Screen.getPrimary().getBounds();
         final double WIDTH = screenBounds.getWidth();
         final double HEIGHT = screenBounds.getHeight();
         final double wid = WIDTH / 2.75 / 620 * 100;
         final double hig = HEIGHT / 781 * 100;
+
+        Wang wang = new Wang(wid, hig);
+        pane.getChildren().add(wang);
+
+        Bounds bounds = wang.localToScene(wang.getBoundsInLocal());
+        
+        
+        
+        double x = wang.getLayoutX();
+        double y = wang.getLayoutY();
+
+
+        //double centerX = (boundsInScreen.getMaxX() + boundsInScreen.getMinX()) / 2;
+        //double centerY = (boundsInScreen.getMaxY() + boundsInScreen.getMinY()) / 2;
+        //double centerX = boundsInScreen.getWidth();
+        //double centerY = boundsInScreen.getHeight();
+
+
+
 
         /*Rectangle screen = new Rectangle(-100, -100, WIDTH, HEIGHT);
         screen.setFill(Color.WHITE);
@@ -36,8 +52,26 @@ public class Main extends Application{
         pane.getChildren().add(body);
         */
 
-        Wang wang = new Wang(wid, hig);
-        pane.getChildren().add(wang);
+        //screen.setOnMouseClicked(e -> {
+          //  wang.animate(boundsInScreen.getWidth(), e.getX(), boundsInScreen.getHeight(), e.getY());
+        //});
+
+        pane.setOnKeyPressed(e -> {
+            
+            if (e.getCode() == KeyCode.UP) {
+                wang.setLayoutY(y + wang.animate(x, y, 1));
+            }
+            else if (e.getCode() == KeyCode.DOWN) {
+                wang.setLayoutY(y + wang.animate(x, y, 2));
+            }
+            else if (e.getCode() == KeyCode.LEFT) {
+                wang.setLayoutX(x + wang.animate(x, y, 3));
+            }
+            else if (e.getCode() == KeyCode.RIGHT) {
+                wang.setLayoutX(x + wang.animate(x, y, 4));
+            }
+            System.out.println(x + " " + y);
+        });
         
         /*screen.setOnMouseMoved(e ->{
             double centerY = body.getY() + (body.getHeight() / 2);
@@ -81,7 +115,7 @@ public class Main extends Application{
         */
         ps.initStyle(StageStyle.TRANSPARENT);
         ps.setAlwaysOnTop(true);
-        Scene scene = new Scene(pane);
+        Scene scene = new Scene(pane, WIDTH, HEIGHT);
         scene.setFill(Color.TRANSPARENT);
         ps.setTitle("DesktopWang");
         ps.setScene(scene);

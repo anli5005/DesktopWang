@@ -1,20 +1,20 @@
-
-
-import javafx.application.Application;
+import javafx.animation.PathTransition;
+import javafx.animation.Timeline;
 import javafx.scene.Group;
-import javafx.geometry.Rectangle2D;
 //import javafx.scene.shape.Rectangle;
-import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.stage.Screen;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 
 public class Wang extends Pane{
+
+    private Group wang = new Group();
+    private final double dx = 250, dy = 100;
+
     public Wang(double wid, double hig){
         ImageView imgV = new ImageView(new Image("wang.png"));
         imgV.setFitWidth(wid);
@@ -22,9 +22,7 @@ public class Wang extends Pane{
 
         Line body = new Line(), armL = new Line(), armR = new Line(), legL = new Line(), legR = new Line();
         Line[] lines = {body, armL, armR, legL, legR};
-        
-        Group wang = new Group();
-        
+                
         for (int i = 0; i < lines.length; i++) {
 
             Line limb = lines[i];
@@ -33,30 +31,80 @@ public class Wang extends Pane{
 
             limb.startXProperty().bind(imgV.fitWidthProperty().divide(2));
         
-
             if (i == 0)
                 limb.endXProperty().bind(body.startXProperty());
             else if (i == 1 || i == 3)
-                limb.endXProperty().bind(body.startXProperty().subtract(20));
+                limb.endXProperty().bind(body.startXProperty().subtract(10));
             else if (i == 2 || i == 4)
-                limb.endXProperty().bind(body.startXProperty().add(20));
+                limb.endXProperty().bind(body.startXProperty().add(10));
             
             if (i == 0)
                 limb.startYProperty().bind(imgV.fitHeightProperty().add(hig/64));
             else if (i == 1 || i == 2)
-                limb.startYProperty().bind((body.startYProperty().add(body.endYProperty()).divide(2)));
+                limb.startYProperty().bind((body.startYProperty().add(body.endYProperty()).divide(2.125)));
             else if (i == 3 || i == 4) 
                 limb.startYProperty().bind(body.endYProperty());
 
             if (i == 0 || i == 1 || i == 2)
-                limb.endYProperty().bind(body.startYProperty().add(50));
+                limb.endYProperty().bind(body.startYProperty().add(25));
             else if (i == 3 || i == 4)
-                limb.endYProperty().bind(body.endYProperty().add(50));
+                limb.endYProperty().bind(body.endYProperty().add(25));
 
             wang.getChildren().add(limb);
         }
 
         wang.getChildren().add(imgV);
         getChildren().add(wang);
+
     }
+    
+    public void animate(double x, double newX, double y, double newY) {
+        Line line = new Line(x, newX, y, newY);
+
+        PathTransition pt = new PathTransition();
+        pt.setDuration(Duration.millis(500));
+        pt.setPath(line);
+        pt.setNode(wang);
+        pt.setCycleCount(1);
+        pt.play();
+
+    }
+
+    public double animate(double x, double y, int z) {
+        
+        double change = 0;
+        
+        Line line = new Line(x,y,x,y);
+        if (z == 1) { 
+            line.setEndY(y - dy);
+            change = y - dy;
+            wang.setLayoutY(wang.getLayoutY() + change);
+        }
+        else if (z == 2) {
+            line.setEndY(y + dy);
+            change = y + dy;
+            wang.setLayoutY(wang.getLayoutY() + change);
+        }
+        else if (z == 3) {
+            line.setEndX(x - dx);
+            change = x - dx;
+            wang.setLayoutX(wang.getLayoutX() + change);
+        }
+        else if (z == 4) {
+            line.setEndX(x + dx);
+            change = x + dx;
+            wang.setLayoutX(wang.getLayoutX() + change);
+        }
+
+        //System.out.println(line.getStartX() + " " + line.getStartY() + " " + line.getEndX() + " " + line.getEndY());
+        
+        PathTransition pt = new PathTransition();
+        pt.setDuration(Duration.millis(500));
+        pt.setPath(line);
+        pt.setNode(wang);
+        pt.setCycleCount(1);
+        pt.play();
+        return change;
+    }
+
 }
