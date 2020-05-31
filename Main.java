@@ -26,13 +26,7 @@ public class Main extends Application{
         Wang wang = new Wang(wid, hig);
         pane.getChildren().add(wang);
 
-        Bounds bounds = wang.localToScene(wang.getBoundsInLocal());
-        
-        
-        
-        double x = wang.getLayoutX();
-        double y = wang.getLayoutY();
-
+        Bounds bounds = wang.localToScene(wang.getBoundsInLocal());        
 
         //double centerX = (boundsInScreen.getMaxX() + boundsInScreen.getMinX()) / 2;
         //double centerY = (boundsInScreen.getMaxY() + boundsInScreen.getMinY()) / 2;
@@ -58,19 +52,14 @@ public class Main extends Application{
 
         pane.setOnKeyPressed(e -> {
             
-            if (e.getCode() == KeyCode.UP) {
-                wang.setLayoutY(y + wang.animate(x, y, 1));
-            }
-            else if (e.getCode() == KeyCode.DOWN) {
-                wang.setLayoutY(y + wang.animate(x, y, 2));
-            }
-            else if (e.getCode() == KeyCode.LEFT) {
-                wang.setLayoutX(x + wang.animate(x, y, 3));
-            }
-            else if (e.getCode() == KeyCode.RIGHT) {
-                wang.setLayoutX(x + wang.animate(x, y, 4));
-            }
-            System.out.println(x + " " + y);
+            if (e.getCode() == KeyCode.UP) 
+                wang.animate(1);
+            else if (e.getCode() == KeyCode.DOWN) 
+                wang.animate(2);
+            else if (e.getCode() == KeyCode.LEFT) 
+                wang.animate(3);
+            else if (e.getCode() == KeyCode.RIGHT) 
+                wang.animate(4);
         });
         
         /*screen.setOnMouseMoved(e ->{

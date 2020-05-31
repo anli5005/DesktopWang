@@ -13,7 +13,8 @@ import javafx.util.Duration;
 public class Wang extends Pane{
 
     private Group wang = new Group();
-    private final double dx = 250, dy = 100;
+    private final double dx = 100, dy = 65;
+    private double x, y;
 
     public Wang(double wid, double hig){
         ImageView imgV = new ImageView(new Image("wang.png"));
@@ -30,7 +31,8 @@ public class Wang extends Pane{
             limb.setStroke(Color.BLACK);
 
             limb.startXProperty().bind(imgV.fitWidthProperty().divide(2));
-        
+            x = limb.getStartX();
+
             if (i == 0)
                 limb.endXProperty().bind(body.startXProperty());
             else if (i == 1 || i == 3)
@@ -40,8 +42,10 @@ public class Wang extends Pane{
             
             if (i == 0)
                 limb.startYProperty().bind(imgV.fitHeightProperty().add(hig/64));
-            else if (i == 1 || i == 2)
+            else if (i == 1 || i == 2) {
                 limb.startYProperty().bind((body.startYProperty().add(body.endYProperty()).divide(2.125)));
+                y = limb.getStartY();
+            }
             else if (i == 3 || i == 4) 
                 limb.startYProperty().bind(body.endYProperty());
 
@@ -70,41 +74,58 @@ public class Wang extends Pane{
 
     }
 
-    public double animate(double x, double y, int z) {
+    public double getCenterX() {
+        return x;
+    }
+
+    public void setCenterX(double newX) {
+        x = newX;
+    }
+
+    public double getCenterY() {
+        return y;
+    }
+
+    public void setCenterY(double newY) {
+        y = newY;
+    }
+
+
+    public void animate(int z) {
         
         double change = 0;
         
-        Line line = new Line(x,y,x,y);
+        Line line = new Line(getCenterX(), getCenterY(), getCenterX(), getCenterY());
         if (z == 1) { 
-            line.setEndY(y - dy);
-            change = y - dy;
-            wang.setLayoutY(wang.getLayoutY() + change);
+            line.setEndY(getCenterY() - dy);
+            change = line.getEndY();
+            setCenterY(getCenterY() + change);
         }
         else if (z == 2) {
-            line.setEndY(y + dy);
-            change = y + dy;
-            wang.setLayoutY(wang.getLayoutY() + change);
+            line.setEndY(getCenterY() + dy);
+            change = line.getEndY();
+            setCenterY(getCenterY() + change);
         }
         else if (z == 3) {
-            line.setEndX(x - dx);
-            change = x - dx;
-            wang.setLayoutX(wang.getLayoutX() + change);
+            line.setEndX(getCenterX() - dx);
+            change = line.getEndX();
+            setCenterX(getCenterX() + change);
         }
         else if (z == 4) {
-            line.setEndX(x + dx);
-            change = x + dx;
-            wang.setLayoutX(wang.getLayoutX() + change);
+            line.setEndX(getCenterX() + dx);
+            change = line.getEndX();
+            setCenterX(getCenterX() + change);
         }
 
         //System.out.println(line.getStartX() + " " + line.getStartY() + " " + line.getEndX() + " " + line.getEndY());
-        
+        System.out.println(line.getStartX() + ", " + line.getStartY() + ", " + line.getEndX() + ", " + line.getEndY());
         PathTransition pt = new PathTransition();
         pt.setDuration(Duration.millis(500));
         pt.setPath(line);
-        pt.setNode(wang);
+        pt.setNode(wang.getChildren().get(0));
         pt.setCycleCount(1);
         pt.play();
-        return change;
+        
     }
 
 }
