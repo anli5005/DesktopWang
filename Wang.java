@@ -7,7 +7,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 public class Wang extends Pane{
@@ -91,41 +90,40 @@ public class Wang extends Pane{
     }
 
 
-    public void animate(int z) {
-        
+    public double animate(double x, double y, int z) {
+
         double change = 0;
-        
-        Line line = new Line(getCenterX(), getCenterY(), getCenterX(), getCenterY());
+
+        Line line = new Line(x,y,x,y);
         if (z == 1) { 
-            line.setEndY(getCenterY() - dy);
-            change = line.getEndY();
-            setCenterY(getCenterY() + change);
+            line.setEndY(y - dy);
+            change = y - dy;
+            wang.setLayoutY(wang.getLayoutY() + change);
         }
         else if (z == 2) {
-            line.setEndY(getCenterY() + dy);
-            change = line.getEndY();
-            setCenterY(getCenterY() + change);
+            line.setEndY(y + dy);
+            change = y + dy;
+            wang.setLayoutY(wang.getLayoutY() + change);
         }
         else if (z == 3) {
-            line.setEndX(getCenterX() - dx);
-            change = line.getEndX();
-            setCenterX(getCenterX() + change);
+            line.setEndX(x - dx);
+            change = x - dx;
+            wang.setLayoutX(wang.getLayoutX() + change);
         }
         else if (z == 4) {
-            line.setEndX(getCenterX() + dx);
-            change = line.getEndX();
-            setCenterX(getCenterX() + change);
+            line.setEndX(x + dx);
+            change = x + dx;
+            wang.setLayoutX(wang.getLayoutX() + change);
         }
 
         //System.out.println(line.getStartX() + " " + line.getStartY() + " " + line.getEndX() + " " + line.getEndY());
-        System.out.println(line.getStartX() + ", " + line.getStartY() + ", " + line.getEndX() + ", " + line.getEndY());
+
         PathTransition pt = new PathTransition();
         pt.setDuration(Duration.millis(500));
         pt.setPath(line);
-        pt.setNode(wang.getChildren().get(0));
+        pt.setNode(wang);
         pt.setCycleCount(1);
         pt.play();
-        
+        return change;
     }
-
 }

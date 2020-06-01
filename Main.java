@@ -33,7 +33,8 @@ public class Main extends Application{
         //double centerX = boundsInScreen.getWidth();
         //double centerY = boundsInScreen.getHeight();
 
-
+        double x = wang.getLayoutX();
+        double y = wang.getLayoutY();
 
 
         /*Rectangle screen = new Rectangle(-100, -100, WIDTH, HEIGHT);
@@ -51,15 +52,20 @@ public class Main extends Application{
         //});
 
         pane.setOnKeyPressed(e -> {
-            
-            if (e.getCode() == KeyCode.UP) 
-                wang.animate(1);
-            else if (e.getCode() == KeyCode.DOWN) 
-                wang.animate(2);
-            else if (e.getCode() == KeyCode.LEFT) 
-                wang.animate(3);
-            else if (e.getCode() == KeyCode.RIGHT) 
-                wang.animate(4);
+
+            if (e.getCode() == KeyCode.UP) {
+                wang.setLayoutY(y + wang.animate(x, y, 1));
+            }
+            else if (e.getCode() == KeyCode.DOWN) {
+                wang.setLayoutY(y + wang.animate(x, y, 2));
+            }
+            else if (e.getCode() == KeyCode.LEFT) {
+                wang.setLayoutX(x + wang.animate(x, y, 3));
+            }
+            else if (e.getCode() == KeyCode.RIGHT) {
+                wang.setLayoutX(x + wang.animate(x, y, 4));
+            }
+            System.out.println(x + " " + y);
         });
         
         /*screen.setOnMouseMoved(e ->{
