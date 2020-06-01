@@ -1,4 +1,3 @@
-
 import javafx.application.Application;
 import javafx.geometry.Bounds;
 import javafx.geometry.Rectangle2D;
@@ -50,6 +49,20 @@ public class Main extends Application{
         //screen.setOnMouseClicked(e -> {
           //  wang.animate(boundsInScreen.getWidth(), e.getX(), boundsInScreen.getHeight(), e.getY());
         //});
+
+        wang.setOnMouseClicked(e -> {
+            int delay = 1000;
+            long start = System.currentTimeMillis();
+            while (start >= System.currentTimeMillis() - delay); // sleeps for 1 second
+            
+            pane.setOnMouseMoved( f -> {
+                wang.animate(x,y,f.getX(),f.getY());
+                wang.setLayoutX(f.getX());
+                wang.setLayoutY(f.getY());
+                System.out.println(e.getX() + " " + e.getY() + " " + f.getX() + " " + f.getY());
+            });
+        
+        });
 
         pane.setOnKeyPressed(e -> {
 

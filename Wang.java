@@ -61,8 +61,9 @@ public class Wang extends Pane{
 
     }
     
-    public void animate(double x, double newX, double y, double newY) {
-        Line line = new Line(x, newX, y, newY);
+    
+    public void animate(double x, double y, double eX, double eY) {
+        Line line = new Line(x, y, eX, eY);
 
         PathTransition pt = new PathTransition();
         pt.setDuration(Duration.millis(500));
@@ -73,7 +74,7 @@ public class Wang extends Pane{
 
     }
 
-    public double getCenterX() {
+    /*public double getCenterX() {
         return x;
     }
 
@@ -88,7 +89,7 @@ public class Wang extends Pane{
     public void setCenterY(double newY) {
         y = newY;
     }
-
+    */
 
     public double animate(double x, double y, int z) {
 
