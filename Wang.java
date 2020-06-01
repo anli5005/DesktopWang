@@ -1,3 +1,5 @@
+import java.util.Random;
+
 import javafx.animation.PathTransition;
 import javafx.animation.Timeline;
 import javafx.scene.Group;
@@ -14,6 +16,7 @@ public class Wang extends Pane{
     private Group wang = new Group();
     private final double dx = 100, dy = 65;
     private double x, y;
+    private String[] external = {"wang.png"};
 
     public Wang(double wid, double hig){
         ImageView imgV = new ImageView(new Image("wang.png"));
@@ -60,19 +63,6 @@ public class Wang extends Pane{
         getChildren().add(wang);
 
     }
-    
-    
-    public void animate(double x, double y, double eX, double eY) {
-        Line line = new Line(x, y, eX, eY);
-
-        PathTransition pt = new PathTransition();
-        pt.setDuration(Duration.millis(500));
-        pt.setPath(line);
-        pt.setNode(wang);
-        pt.setCycleCount(1);
-        pt.play();
-
-    }
 
     /*public double getCenterX() {
         return x;
@@ -96,28 +86,29 @@ public class Wang extends Pane{
         double change = 0;
 
         Line line = new Line(x,y,x,y);
+        getChildren().add(line);
+        line.setStroke(Color.CYAN);
         if (z == 1) { 
-            line.setEndY(y - dy);
+            line.setEndY(y-dy);
             change = y - dy;
-            wang.setLayoutY(wang.getLayoutY() + change);
         }
         else if (z == 2) {
-            line.setEndY(y + dy);
+            line.setEndY(y+dy);
             change = y + dy;
-            wang.setLayoutY(wang.getLayoutY() + change);
         }
         else if (z == 3) {
-            line.setEndX(x - dx);
+            line.setEndX(x-dx);
             change = x - dx;
-            wang.setLayoutX(wang.getLayoutX() + change);
         }
         else if (z == 4) {
-            line.setEndX(x + dx);
+            line.setEndX(x+dx);
             change = x + dx;
-            wang.setLayoutX(wang.getLayoutX() + change);
         }
 
-        //System.out.println(line.getStartX() + " " + line.getStartY() + " " + line.getEndX() + " " + line.getEndY());
+        if (z == 1 || z == 2)
+            wang.setLayoutY(wang.getLayoutY() + change);
+        else   
+            wang.setLayoutX(wang.getLayoutX() + change);
 
         PathTransition pt = new PathTransition();
         pt.setDuration(Duration.millis(500));
@@ -127,4 +118,39 @@ public class Wang extends Pane{
         pt.play();
         return change;
     }
+
+    public void animate(double x, double y) {
+        Line line = new Line(x, y, 100, 100);
+        getChildren().add(line);
+        line.setStroke(Color.CYAN);
+        PathTransition pt = new PathTransition();
+        pt.setDuration(Duration.millis(2000));
+        pt.setPath(line);
+        pt.setNode(wang);
+        pt.setCycleCount(1);
+        pt.play();
+
+    }
+
+    public ImageView display() {
+        Random rand = new Random();
+        String file = external[rand.nextInt(external.length)];
+        ImageView imgV = new ImageView(new Image(file));
+        imgV.setFitHeight(500);
+        imgV.setFitWidth(500);
+        return imgV;
+    }
+
+    /*public void p() {
+        Line line = new Line(0,0,1536,864);
+        PathTransition pt = new PathTransition();
+        pt.setDuration(Duration.seconds(4));
+        pt.setPath(line);
+        pt.setNode(wang);
+        pt.setCycleCount(1);
+        pt.play();
+        wang.setLayoutX(line.getEndX() - 100);
+        wang.setLayoutY(line.getEndY() - 100);
+    }*/
+
 }

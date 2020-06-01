@@ -24,9 +24,12 @@ public class Main extends Application{
 
         Wang wang = new Wang(wid, hig);
         pane.getChildren().add(wang);
-
+        
         Bounds bounds = wang.localToScene(wang.getBoundsInLocal());        
+        //System.out.println(bounds.getMinX() + " " + bounds.getMaxX() + " " + bounds.getMinY() + " " + bounds.getMaxY());
+        System.out.println(WIDTH + " " + HEIGHT);
 
+        
         //double centerX = (boundsInScreen.getMaxX() + boundsInScreen.getMinX()) / 2;
         //double centerY = (boundsInScreen.getMaxY() + boundsInScreen.getMinY()) / 2;
         //double centerX = boundsInScreen.getWidth();
@@ -55,11 +58,12 @@ public class Main extends Application{
             long start = System.currentTimeMillis();
             while (start >= System.currentTimeMillis() - delay); // sleeps for 1 second
             
-            pane.setOnMouseMoved( f -> {
-                wang.animate(x,y,f.getX(),f.getY());
+            pane.setOnMouseMoved(f -> {
+                //System.out.println(e.getX() + " " + e.getY() + " " + f.getX() + " " + f.getY());
+                wang.animate(x,y);
                 wang.setLayoutX(f.getX());
                 wang.setLayoutY(f.getY());
-                System.out.println(e.getX() + " " + e.getY() + " " + f.getX() + " " + f.getY());
+                System.out.println(f.getX() + " " + f.getY());
             });
         
         });
@@ -78,9 +82,12 @@ public class Main extends Application{
             else if (e.getCode() == KeyCode.RIGHT) {
                 wang.setLayoutX(x + wang.animate(x, y, 4));
             }
-            System.out.println(x + " " + y);
+            else if (e.getText().equals("1"))
+                pane.getChildren().add(wang.display());
         });
         
+        
+
         /*screen.setOnMouseMoved(e ->{
             double centerY = body.getY() + (body.getHeight() / 2);
             double side1 = Math.abs(e.getY() - centerY);
