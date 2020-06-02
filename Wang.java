@@ -10,7 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.util.Duration;
-import javafx.scene.shape.Circle;
+import javafx.scene.shape.Arc;
 
 public class Wang extends Pane{
 
@@ -138,26 +138,39 @@ public class Wang extends Pane{
 
     }
 
-    /*public void walk(double speed) {
-        Circle circle = new Circle(120, 120, 1);
+    public void walk(double speed) {
+        Arc arc = new Arc(0, 0, 11, 11, 300, -50);
+        Line legL = (Line) wang.getChildren().get(3);
+        Line legR = (Line) wang.getChildren().get(4);
+        System.out.println("LegL " + legL);
+        System.out.println("LegR " + legR);
+
+        arc.centerXProperty().bind(legL.startXProperty());
+        arc.centerYProperty().bind(legL.startYProperty());
+        arc.centerXProperty().bind(legR.startXProperty());
+        arc.centerYProperty().bind(legR.startYProperty());
         
-        // circle.centerXProperty().bind(wang.getChildren().get(3).startX());
-        // circle.centerYProperty().bind(wang.getChildren().get(3).startY());
-        if (wang.getChildren().get(3) instanceof Line) {
-            Line legR = (Line) wang.getChildren().get(3);
-        }
-        circle.setFill(Color.TRANSPARENT);
-        circle.setStroke(Color.TRANSPARENT);
-        getChildren().add(circle);
-        PathTransition walking = new PathTransition();
-        walking.setDuration(Duration.millis(speed));
-        walking.setPath(circle);
-        walking.setNode(wang.getChildren().get(3));
-        walking.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
-        walking.setCycleCount(Timeline.INDEFINITE);
-        walking.setAutoReverse(true);
-        walking.play();
-    }*/
+        arc.setFill(Color.TRANSPARENT);
+        arc.setStroke(Color.TRANSPARENT);
+        getChildren().add(arc);
+        PathTransition walking1 = new PathTransition();
+        walking1.setDuration(Duration.millis(speed));
+        walking1.setPath(arc);
+        walking1.setNode(wang.getChildren().get(3));
+        walking1.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+        walking1.setCycleCount(Timeline.INDEFINITE);
+        walking1.setAutoReverse(true);
+        walking1.play();
+
+        PathTransition walking2 = new PathTransition();
+        walking2.setDuration(Duration.millis(speed));
+        walking2.setPath(arc);
+        walking2.setNode(wang.getChildren().get(4));
+        walking2.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+        walking2.setCycleCount(Timeline.INDEFINITE);
+        walking2.setAutoReverse(true);
+        walking2.play();
+    }
 
     public ImageView display() {
         Random rand = new Random();
