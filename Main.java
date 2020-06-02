@@ -29,15 +29,12 @@ public class Main extends Application{
         //System.out.println(bounds.getMinX() + " " + bounds.getMaxX() + " " + bounds.getMinY() + " " + bounds.getMaxY());
         System.out.println(WIDTH + " " + HEIGHT);
 
-        
+        double x = wang.getLayoutX();
+        double y = wang.getLayoutY();
         //double centerX = (boundsInScreen.getMaxX() + boundsInScreen.getMinX()) / 2;
         //double centerY = (boundsInScreen.getMaxY() + boundsInScreen.getMinY()) / 2;
         //double centerX = boundsInScreen.getWidth();
         //double centerY = boundsInScreen.getHeight();
-
-        double x = wang.getLayoutX();
-        double y = wang.getLayoutY();
-
 
         /*Rectangle screen = new Rectangle(-100, -100, WIDTH, HEIGHT);
         screen.setFill(Color.WHITE);
@@ -54,17 +51,17 @@ public class Main extends Application{
         //});
 
         wang.setOnMouseClicked(e -> {
-            int delay = 1000;
-            long start = System.currentTimeMillis();
-            while (start >= System.currentTimeMillis() - delay); // sleeps for 1 second
+            // int delay = 1000;
+            // long start = System.currentTimeMillis();
+            // while (start >= System.currentTimeMillis() - delay); // sleeps for 1 second
             
-            pane.setOnMouseMoved(f -> {
+            pane.setOnMouseDragged(f -> {
                 //System.out.println(e.getX() + " " + e.getY() + " " + f.getX() + " " + f.getY());
-                // wang.animate(x,y);
-                // wang.setLayoutX(f.getX());
-                // wang.setLayoutY(f.getY());
+                wang.animate(x,y);
+                wang.setLayoutX(f.getX());
+                wang.setLayoutY(f.getY());
                 // System.out.println(f.getX() + " " + f.getY());
-                wang.walk(1000);
+                // wang.walk(1000);
             });
         
         });
@@ -72,21 +69,34 @@ public class Main extends Application{
         pane.setOnKeyPressed(e -> {
 
             if (e.getCode() == KeyCode.UP) {
-                wang.setLayoutY(y + wang.animate(x, y, 1));
+                wang.setLayoutY(y + wang.animate(wang.getLayoutX(), wang.getLayoutY(), 1));
             }
             else if (e.getCode() == KeyCode.DOWN) {
-                wang.setLayoutY(y + wang.animate(x, y, 2));
+                wang.setLayoutY(y + wang.animate(wang.getLayoutX(), wang.getLayoutY(), 2));
             }
             else if (e.getCode() == KeyCode.LEFT) {
-                wang.setLayoutX(x + wang.animate(x, y, 3));
+                wang.setLayoutX(x + wang.animate(wang.getLayoutX(), wang.getLayoutY(), 3));
             }
             else if (e.getCode() == KeyCode.RIGHT) {
-                wang.setLayoutX(x + wang.animate(x, y, 4));
+                wang.setLayoutX(x + wang.animate(wang.getLayoutX(), wang.getLayoutY(), 4));
             }
             else if (e.getText().equals("1"))
                 pane.getChildren().add(wang.display());
+            System.out.println(wang.getLayoutX() + " " + wang.getLayoutY());
         });
         
+
+        /*pane.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.UP) 
+                wang.setLayoutY(wang.getLayoutY()-50);
+            else if (e.getCode() == KeyCode.DOWN)
+                wang.setLayoutY(wang.getLayoutY()+50);
+            else if (e.getCode() == KeyCode.LEFT)
+                wang.setLayoutX(wang.getLayoutX()-100);
+            else if(e.getCode() == KeyCode.RIGHT)
+                wang.setLayoutX(wang.getLayoutX()+100);
+            
+        });*/
         
 
         /*screen.setOnMouseMoved(e ->{

@@ -106,12 +106,16 @@ public class Wang extends Pane{
             line.setEndX(x+dx);
             change = x + dx;
         }
-
-        if (z == 1 || z == 2)
-            wang.setLayoutY(wang.getLayoutY() + change);
-        else   
-            wang.setLayoutX(wang.getLayoutX() + change);
-
+        if ((z == 1 || z == 2) && y - change < 25)
+            wang.setLayoutY(25);
+        else if ((z == 3 || z == 4) && x - change < 50)
+            wang.setLayoutX(50);
+        else { 
+            if (z == 1 || z == 2)
+                wang.setLayoutY(wang.getLayoutY() + change);
+            else   
+                wang.setLayoutX(wang.getLayoutX() + change);
+        }
         PathTransition pt = new PathTransition();
         pt.setDuration(Duration.millis(500));
         pt.setPath(line);
@@ -122,7 +126,7 @@ public class Wang extends Pane{
     }
 
     public void animate(double x, double y) {
-        Line line = new Line(x, y, 100, 100);
+        Line line = new Line(x, y, -100, 100);
         getChildren().add(line);
         line.setStroke(Color.CYAN);
         PathTransition pt = new PathTransition();
@@ -134,7 +138,7 @@ public class Wang extends Pane{
 
     }
 
-    public void walk(double speed) {
+    /*public void walk(double speed) {
         Circle circle = new Circle(120, 120, 1);
         
         // circle.centerXProperty().bind(wang.getChildren().get(3).startX());
@@ -153,7 +157,7 @@ public class Wang extends Pane{
         walking.setCycleCount(Timeline.INDEFINITE);
         walking.setAutoReverse(true);
         walking.play();
-    }
+    }*/
 
     public ImageView display() {
         Random rand = new Random();
