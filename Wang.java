@@ -10,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.util.Duration;
+import javafx.scene.shape.Circle;
 
 public class Wang extends Pane{
 
@@ -62,6 +63,7 @@ public class Wang extends Pane{
         wang.getChildren().add(imgV);
         getChildren().add(wang);
 
+        
     }
 
     /*public double getCenterX() {
@@ -130,6 +132,27 @@ public class Wang extends Pane{
         pt.setCycleCount(1);
         pt.play();
 
+    }
+
+    public void walk(double speed) {
+        Circle circle = new Circle(120, 120, 1);
+        
+        // circle.centerXProperty().bind(wang.getChildren().get(3).startX());
+        // circle.centerYProperty().bind(wang.getChildren().get(3).startY());
+        if (wang.getChildren().get(3) instanceof Line) {
+            Line legR = (Line) wang.getChildren().get(3);
+        }
+        circle.setFill(Color.TRANSPARENT);
+        circle.setStroke(Color.TRANSPARENT);
+        getChildren().add(circle);
+        PathTransition walking = new PathTransition();
+        walking.setDuration(Duration.millis(speed));
+        walking.setPath(circle);
+        walking.setNode(wang.getChildren().get(3));
+        walking.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+        walking.setCycleCount(Timeline.INDEFINITE);
+        walking.setAutoReverse(true);
+        walking.play();
     }
 
     public ImageView display() {

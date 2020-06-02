@@ -60,10 +60,11 @@ public class Main extends Application{
             
             pane.setOnMouseMoved(f -> {
                 //System.out.println(e.getX() + " " + e.getY() + " " + f.getX() + " " + f.getY());
-                wang.animate(x,y);
-                wang.setLayoutX(f.getX());
-                wang.setLayoutY(f.getY());
-                System.out.println(f.getX() + " " + f.getY());
+                // wang.animate(x,y);
+                // wang.setLayoutX(f.getX());
+                // wang.setLayoutY(f.getY());
+                // System.out.println(f.getX() + " " + f.getY());
+                wang.walk(1000);
             });
         
         });
