@@ -1,6 +1,7 @@
 import java.util.Random;
 
 import javafx.animation.PathTransition;
+import javafx.animation.SequentialTransition;
 import javafx.animation.Timeline;
 import javafx.scene.Group;
 //import javafx.scene.shape.Rectangle;
@@ -193,4 +194,31 @@ public class Wang extends Pane{
         wang.setLayoutY(line.getEndY() - 100);
     }*/
 
+    public void start(double width, double height) {
+        wang.setLayoutX(width / 4);
+        wang.setLayoutY(height + 50);
+        
+        Line line = new Line(wang.getLayoutX(), wang.getLayoutY(), 390, -25);
+        //getChildren().add(line);
+        line.setStroke(Color.CYAN);
+        PathTransition pt = new PathTransition();
+        pt.setDuration(Duration.millis(2000));
+        pt.setPath(line);
+        pt.setNode(wang);
+        pt.setAutoReverse(true);
+        pt.setCycleCount(3);
+        
+        Line line2 = new Line(wang.getLayoutX(), wang.getLayoutY(), 500, -500);
+       // getChildren().add(line2);
+        line2.setStroke(Color.CYAN);
+        PathTransition pt2 = new PathTransition();
+        pt2.setDuration(Duration.millis(2000));
+        pt2.setPath(line2);
+        pt2.setNode(wang);
+        pt2.setCycleCount(1);
+
+        SequentialTransition seqT = new SequentialTransition(pt,pt2);
+        seqT.play();
+
+    }
 }

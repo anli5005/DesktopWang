@@ -14,7 +14,6 @@ public class Main extends Application{
     @Override
     public void start(Stage ps) {
         Pane pane = new Pane();
-        
 
         Rectangle2D screenBounds = Screen.getPrimary().getBounds();
         final double WIDTH = screenBounds.getWidth();
@@ -31,6 +30,8 @@ public class Main extends Application{
 
         double x = wang.getLayoutX();
         double y = wang.getLayoutY();
+
+        wang.start(WIDTH,HEIGHT);
         //double centerX = (boundsInScreen.getMaxX() + boundsInScreen.getMinX()) / 2;
         //double centerY = (boundsInScreen.getMaxY() + boundsInScreen.getMinY()) / 2;
         //double centerX = boundsInScreen.getWidth();
@@ -66,7 +67,7 @@ public class Main extends Application{
         
         });
 
-        pane.setOnKeyPressed(e -> {
+        /*pane.setOnKeyPressed(e -> {
 
             if (e.getCode() == KeyCode.UP) {
                 wang.setLayoutY(y + wang.animate(wang.getLayoutX(), wang.getLayoutY(), 1));
@@ -83,20 +84,19 @@ public class Main extends Application{
             else if (e.getText().equals("1"))
                 pane.getChildren().add(wang.display());
             System.out.println(wang.getLayoutX() + " " + wang.getLayoutY());
-        });
+        });*/
         
 
-        /*pane.setOnKeyPressed(e -> {
+        pane.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.UP) 
                 wang.setLayoutY(wang.getLayoutY()-50);
-            else if (e.getCode() == KeyCode.DOWN)
+            if (e.getCode() == KeyCode.DOWN)
                 wang.setLayoutY(wang.getLayoutY()+50);
-            else if (e.getCode() == KeyCode.LEFT)
+            if (e.getCode() == KeyCode.LEFT)
                 wang.setLayoutX(wang.getLayoutX()-100);
-            else if(e.getCode() == KeyCode.RIGHT)
-                wang.setLayoutX(wang.getLayoutX()+100);
-            
-        });*/
+            if (e.getCode() == KeyCode.RIGHT)
+                wang.setLayoutX(wang.getLayoutX()+100);            
+        });
         
 
         /*screen.setOnMouseMoved(e ->{
