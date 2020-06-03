@@ -32,6 +32,7 @@ public class Main extends Application{
         double y = wang.getLayoutY();
 
         wang.start(WIDTH,HEIGHT);
+        wang.walk(700);
         //double centerX = (boundsInScreen.getMaxX() + boundsInScreen.getMinX()) / 2;
         //double centerY = (boundsInScreen.getMaxY() + boundsInScreen.getMinY()) / 2;
         //double centerX = boundsInScreen.getWidth();
@@ -62,7 +63,7 @@ public class Main extends Application{
                 wang.setLayoutX(f.getX());
                 wang.setLayoutY(f.getY());
                 // System.out.println(f.getX() + " " + f.getY());
-                // wang.walk(1000);
+                //wang.walk(1000);
             });
         
         });
