@@ -127,7 +127,7 @@ public class Wang extends Pane{
     }
 
     public void animate(double x, double y) {
-        Line line = new Line(x, y, -100, 100);
+        Line line = new Line(x, y, 1, 1);
         //getChildren().add(line);
         line.setStroke(Color.CYAN);
         PathTransition pt = new PathTransition();
@@ -195,11 +195,11 @@ public class Wang extends Pane{
     }*/
 
     public void start(double width, double height) {
-        wang.setLayoutX(width / 4);
-        wang.setLayoutY(height + 50);
+        //wang.setLayoutX(width / 2);
+        //wang.setLayoutY(height + 50);
         
-        Line line = new Line(wang.getLayoutX(), wang.getLayoutY(), 390, -25);
-        //getChildren().add(line);
+        Line line = new Line(width/2, height + 50, width/2, 850);
+        getChildren().add(line);
         line.setStroke(Color.CYAN);
         PathTransition pt = new PathTransition();
         pt.setDuration(Duration.millis(2000));
@@ -207,7 +207,8 @@ public class Wang extends Pane{
         pt.setNode(wang);
         pt.setAutoReverse(true);
         pt.setCycleCount(3);
-        
+        pt.play();
+        /*
         Line line2 = new Line(wang.getLayoutX(), wang.getLayoutY(), 500, -500);
        // getChildren().add(line2);
         line2.setStroke(Color.CYAN);
@@ -218,7 +219,6 @@ public class Wang extends Pane{
         pt2.setCycleCount(1);
 
         SequentialTransition seqT = new SequentialTransition(pt,pt2);
-        seqT.play();
-
+        seqT.play();*/
     }
 }

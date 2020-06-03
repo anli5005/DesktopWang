@@ -25,15 +25,17 @@ public class Main extends Application{
         pane.getChildren().add(wang);
         
         Bounds bounds = wang.localToScene(wang.getBoundsInLocal());        
-        //System.out.println(bounds.getMinX() + " " + bounds.getMaxX() + " " + bounds.getMinY() + " " + bounds.getMaxY());
-        System.out.println(WIDTH + " " + HEIGHT);
 
         double x = wang.getLayoutX();
         double y = wang.getLayoutY();
 
         wang.start(WIDTH,HEIGHT);
 
-        
+
+        //wang.setLayoutX(WIDTH / 2);
+        //wang.setLayoutY(HEIGHT / 2);
+
+        //wang.walk(700);
         //double centerX = (boundsInScreen.getMaxX() + boundsInScreen.getMinX()) / 2;
         //double centerY = (boundsInScreen.getMaxY() + boundsInScreen.getMinY()) / 2;
         //double centerX = boundsInScreen.getWidth();
@@ -52,21 +54,20 @@ public class Main extends Application{
         //screen.setOnMouseClicked(e -> {
           //  wang.animate(boundsInScreen.getWidth(), e.getX(), boundsInScreen.getHeight(), e.getY());
         //});
+        
 
-        wang.setOnMouseClicked(e -> {
+        pane.setOnMouseDragged(e -> {
             // int delay = 1000;
             // long start = System.currentTimeMillis();
-       
+            
             // while (start >= System.currentTimeMillis() - delay); // sleeps for 1 second
             
-            pane.setOnMouseDragged(f -> {
-                //System.out.println(e.getX() + " " + e.getY() + " " + f.getX() + " " + f.getY());
-                wang.animate(x,y);
-                wang.setLayoutX(f.getX());
-                wang.setLayoutY(f.getY());
-                // System.out.println(f.getX() + " " + f.getY());
-                // wang.walk(1000);
-            });
+            wang.animate(x,y);
+            wang.setLayoutX(e.getX());
+            wang.setLayoutY(e.getY());
+
+            System.out.println(x + " " + y + " " + wang.getLayoutX() + " " + wang.getLayoutY());
+            
         
         });
 
