@@ -32,6 +32,8 @@ public class Main extends Application{
         double y = wang.getLayoutY();
 
         wang.start(WIDTH,HEIGHT);
+
+        
         //double centerX = (boundsInScreen.getMaxX() + boundsInScreen.getMinX()) / 2;
         //double centerY = (boundsInScreen.getMaxY() + boundsInScreen.getMinY()) / 2;
         //double centerX = boundsInScreen.getWidth();
@@ -54,6 +56,7 @@ public class Main extends Application{
         wang.setOnMouseClicked(e -> {
             // int delay = 1000;
             // long start = System.currentTimeMillis();
+       
             // while (start >= System.currentTimeMillis() - delay); // sleeps for 1 second
             
             pane.setOnMouseDragged(f -> {

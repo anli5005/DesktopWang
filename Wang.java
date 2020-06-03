@@ -128,7 +128,7 @@ public class Wang extends Pane{
 
     public void animate(double x, double y) {
         Line line = new Line(x, y, -100, 100);
-        getChildren().add(line);
+        //getChildren().add(line);
         line.setStroke(Color.CYAN);
         PathTransition pt = new PathTransition();
         pt.setDuration(Duration.millis(2000));
