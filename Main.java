@@ -73,7 +73,7 @@ public class Main extends Application{
         
         });
 
-        /*pane.setOnKeyPressed(e -> {
+        pane.setOnKeyPressed(e -> {
 
             if (e.getCode() == KeyCode.UP) {
                 wang.setLayoutY(y + wang.animate(wang.getLayoutX(), wang.getLayoutY(), 1));
@@ -90,7 +90,7 @@ public class Main extends Application{
             else if (e.getText().equals("1"))
                 pane.getChildren().add(wang.display());
             System.out.println(wang.getLayoutX() + " " + wang.getLayoutY());
-        });*/
+        });
 
         // pane.setOnMouseClicked(e -> {
         //     clickCount++;

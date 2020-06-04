@@ -140,7 +140,8 @@ public class Wang extends Pane{
     }
 
     public void walk(double speed) {
-        Arc arc = new Arc(0, 0, 11, 11, 300, -50);
+        Arc arc = new Arc(0, 0, 11, 11, 250, 50);
+        Arc arc2 = new Arc(0, 0, 11, 11, 300, -50);
         Line legL = (Line) wang.getChildren().get(3);
         Line legR = (Line) wang.getChildren().get(4);
         System.out.println("LegL " + legL);
@@ -148,12 +149,16 @@ public class Wang extends Pane{
 
         arc.centerXProperty().bind(legL.startXProperty());
         arc.centerYProperty().bind(legL.startYProperty());
-        arc.centerXProperty().bind(legR.startXProperty());
-        arc.centerYProperty().bind(legR.startYProperty());
+        arc2.centerXProperty().bind(legR.startXProperty());
+        arc2.centerYProperty().bind(legR.startYProperty());
         
         arc.setFill(Color.TRANSPARENT);
         arc.setStroke(Color.TRANSPARENT);
         getChildren().add(arc);
+        arc2.setFill(Color.TRANSPARENT);
+        arc2.setStroke(Color.TRANSPARENT);
+        getChildren().add(arc2);
+
         PathTransition walking1 = new PathTransition();
         walking1.setDuration(Duration.millis(speed));
         walking1.setPath(arc);
@@ -165,7 +170,7 @@ public class Wang extends Pane{
 
         PathTransition walking2 = new PathTransition();
         walking2.setDuration(Duration.millis(speed));
-        walking2.setPath(arc);
+        walking2.setPath(arc2);
         walking2.setNode(wang.getChildren().get(4));
         walking2.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
         walking2.setCycleCount(Timeline.INDEFINITE);
