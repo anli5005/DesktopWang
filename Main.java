@@ -10,8 +10,12 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Screen;
 
+
+
 public class Main extends Application{
     public double clickCount = 0;
+    private double x;
+    private double y;
 
     @Override
     public void start(Stage ps) {
@@ -28,15 +32,9 @@ public class Main extends Application{
         
         Bounds bounds = wang.localToScene(wang.getBoundsInLocal());        
 
-        double x = wang.getLayoutX();
-        double y = wang.getLayoutY();
+        
 
-        //wang.start(WIDTH,HEIGHT);
-
-        System.out.println(wang.getTranslateX() + " " + wang.getTranslateY());
-
-        //wang.setLayoutX(WIDTH / 2);
-        //wang.setLayoutY(HEIGHT / 2);
+        wang.start(WIDTH,HEIGHT);
 
         //wang.walk(700);
         //double centerX = (boundsInScreen.getMaxX() + boundsInScreen.getMinX()) / 2;
@@ -71,21 +69,21 @@ public class Main extends Application{
         });
 
         pane.setOnKeyPressed(e -> {
-            if (e.getCode() == KeyCode.UP) {
-                wang.setLayoutY(y + wang.animate(wang.getLayoutX(), wang.getLayoutY(), 1));
-            }
-            else if (e.getCode() == KeyCode.DOWN) {
-                wang.setLayoutY(y + wang.animate(wang.getLayoutX(), wang.getLayoutY(), 2));
-            }
-            else if (e.getCode() == KeyCode.LEFT) {
-                wang.setLayoutX(x + wang.animate(wang.getLayoutX(), wang.getLayoutY(), 3));
-            }
-            else if (e.getCode() == KeyCode.RIGHT) {
-                wang.setLayoutX(x + wang.animate(wang.getLayoutX(), wang.getLayoutY(), 4));
-            }
-            else if (e.getText().equals("1"))
-                pane.getChildren().add(wang.display());
-            System.out.println(wang.getLayoutX() + " " + wang.getLayoutY());
+            if (e.getCode() == KeyCode.UP) 
+                wang.animate(1);
+        
+            else if (e.getCode() == KeyCode.DOWN) 
+                wang.animate(2);
+            
+            else if (e.getCode() == KeyCode.LEFT) 
+                wang.animate(3);
+            
+            else if (e.getCode() == KeyCode.RIGHT) 
+                wang.animate(4);
+            
+            //else if (e.getText().equals("1"))
+              //  pane.getChildren().add(wang.display());
+            // System.out.println(wang.getLayoutX() + " " + wang.getLayoutY());
         });
 
         // pane.setOnMouseClicked(e -> {

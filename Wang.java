@@ -35,7 +35,6 @@ public class Wang extends Pane{
             limb.setStroke(Color.BLACK);
 
             limb.startXProperty().bind(imgV.fitWidthProperty().divide(2));
-            x = limb.getStartX();
 
             if (i == 0)
                 limb.endXProperty().bind(body.startXProperty());
@@ -46,10 +45,8 @@ public class Wang extends Pane{
             
             if (i == 0)
                 limb.startYProperty().bind(imgV.fitHeightProperty().add(hig/64));
-            else if (i == 1 || i == 2) {
+            else if (i == 1 || i == 2) 
                 limb.startYProperty().bind((body.startYProperty().add(body.endYProperty()).divide(2.125)));
-                y = limb.getStartY();
-            }
             else if (i == 3 || i == 4) 
                 limb.startYProperty().bind(body.endYProperty());
 
@@ -62,68 +59,50 @@ public class Wang extends Pane{
         }
 
         wang.getChildren().add(imgV);
-        getChildren().add(wang);
-
-        
+        getChildren().add(wang);   
     }
 
-    /*public double getCenterX() {
+    public double getX() {
         return x;
     }
 
-    public void setCenterX(double newX) {
-        x = newX;
+    public void setX(double x) {
+        this.x = x;
     }
 
-    public double getCenterY() {
+    public double getY() {
         return y;
     }
 
-    public void setCenterY(double newY) {
-        y = newY;
+    public void setY(double y) {
+        this.y = y;
     }
-    */
-
-    public double animate(double x, double y, int z) {
-
-        double change = 0;
+    
+    public void animate(int z) {
 
         Line line = new Line(x,y,x,y);
         getChildren().add(line);
         line.setStroke(Color.CYAN);
-        if (z == 1) { 
+
+        if (z == 1)
             line.setEndY(y-dy);
-            change = y - dy;
-        }
-        else if (z == 2) {
+        else if (z == 2) 
             line.setEndY(y+dy);
-            change = y + dy;
-        }
-        else if (z == 3) {
+        else if (z == 3) 
             line.setEndX(x-dx);
-            change = x - dx;
-        }
-        else if (z == 4) {
+        else if (z == 4) 
             line.setEndX(x+dx);
-            change = x + dx;
-        }
-        if ((z == 1 || z == 2) && y - change < 25)
-            wang.setLayoutY(25);
-        else if ((z == 3 || z == 4) && x - change < 50)
-            wang.setLayoutX(50);
-        else { 
-            if (z == 1 || z == 2)
-                wang.setLayoutY(wang.getLayoutY() + change);
-            else   
-                wang.setLayoutX(wang.getLayoutX() + change);
-        }
+
         PathTransition pt = new PathTransition();
         pt.setDuration(Duration.millis(500));
         pt.setPath(line);
         pt.setNode(wang);
         pt.setCycleCount(1);
         pt.play();
-        return change;
+
+        x = line.getEndX();
+        y = line.getEndY();
+
     }
 
     public void animate(double x, double y) {
@@ -144,8 +123,8 @@ public class Wang extends Pane{
         Arc arc2 = new Arc(0, 0, 11, 11, 300, -50);
         Line legL = (Line) wang.getChildren().get(3);
         Line legR = (Line) wang.getChildren().get(4);
-        System.out.println("LegL " + legL);
-        System.out.println("LegR " + legR);
+        //System.out.println("LegL " + legL);
+        //System.out.println("LegR " + legR);
 
         arc.centerXProperty().bind(legL.startXProperty());
         arc.centerYProperty().bind(legL.startYProperty());
@@ -188,10 +167,8 @@ public class Wang extends Pane{
     }
 
     public void start(double width, double height) {
-        //wang.setLayoutX(width / 2);
-        //wang.setLayoutY(height + 50);
         
-        Line line = new Line(width/2, height + 50, width/2, 850);
+        Line line = new Line(width/2, height + 50, width/2, height);
         getChildren().add(line);
         line.setStroke(Color.TRANSPARENT);
         PathTransition pt = new PathTransition();
@@ -199,19 +176,22 @@ public class Wang extends Pane{
         pt.setPath(line);
         pt.setNode(wang);
         pt.setAutoReverse(true);
-        pt.setCycleCount(3);
+        pt.setCycleCount(1);
         pt.play();
         
-        Line line2 = new Line(wang.getLayoutX(), wang.getLayoutY(), 500, 500);
+        Line line2 = new Line(width/2, height, width/2, height / 2);
         getChildren().add(line2);
         line2.setStroke(Color.TRANSPARENT);
         PathTransition pt2 = new PathTransition();
-        pt2.setDuration(Duration.millis(2000));
+        pt2.setDuration(Duration.millis(1000));
         pt2.setPath(line2);
         pt2.setNode(wang);
         pt2.setCycleCount(1);
 
         SequentialTransition seqT = new SequentialTransition(pt,pt2);
         seqT.play();
+
+        x = width/2;
+        y = height/2;
     }
 }
