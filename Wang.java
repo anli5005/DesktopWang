@@ -200,7 +200,7 @@ public class Wang extends Pane{
         
         Line line = new Line(width/2, height + 50, width/2, 850);
         getChildren().add(line);
-        line.setStroke(Color.CYAN);
+        line.setStroke(Color.TRANSPARENT);
         PathTransition pt = new PathTransition();
         pt.setDuration(Duration.millis(2000));
         pt.setPath(line);
@@ -208,10 +208,10 @@ public class Wang extends Pane{
         pt.setAutoReverse(true);
         pt.setCycleCount(3);
         pt.play();
-        /*
-        Line line2 = new Line(wang.getLayoutX(), wang.getLayoutY(), 500, -500);
-       // getChildren().add(line2);
-        line2.setStroke(Color.CYAN);
+        
+        Line line2 = new Line(wang.getLayoutX(), wang.getLayoutY(), 500, 500);
+        getChildren().add(line2);
+        line2.setStroke(Color.TRANSPARENT);
         PathTransition pt2 = new PathTransition();
         pt2.setDuration(Duration.millis(2000));
         pt2.setPath(line2);
@@ -219,6 +219,6 @@ public class Wang extends Pane{
         pt2.setCycleCount(1);
 
         SequentialTransition seqT = new SequentialTransition(pt,pt2);
-        seqT.play();*/
+        seqT.play();
     }
 }

@@ -30,7 +30,7 @@ public class Main extends Application{
         double y = wang.getLayoutY();
 
         wang.start(WIDTH,HEIGHT);
-
+        wang.walk(1000);
 
         //wang.setLayoutX(WIDTH / 2);
         //wang.setLayoutY(HEIGHT / 2);
