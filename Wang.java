@@ -182,18 +182,6 @@ public class Wang extends Pane{
         return imgV;
     }
 
-    /*public void p() {
-        Line line = new Line(0,0,1536,864);
-        PathTransition pt = new PathTransition();
-        pt.setDuration(Duration.seconds(4));
-        pt.setPath(line);
-        pt.setNode(wang);
-        pt.setCycleCount(1);
-        pt.play();
-        wang.setLayoutX(line.getEndX() - 100);
-        wang.setLayoutY(line.getEndY() - 100);
-    }*/
-
     public void start(double width, double height) {
         //wang.setLayoutX(width / 2);
         //wang.setLayoutY(height + 50);

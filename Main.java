@@ -29,8 +29,9 @@ public class Main extends Application{
         double x = wang.getLayoutX();
         double y = wang.getLayoutY();
 
-        wang.start(WIDTH,HEIGHT);
-        wang.walk(1000);
+        //wang.start(WIDTH,HEIGHT);
+
+        System.out.println(wang.getTranslateX() + " " + wang.getTranslateY());
 
         //wang.setLayoutX(WIDTH / 2);
         //wang.setLayoutY(HEIGHT / 2);
@@ -59,20 +60,15 @@ public class Main extends Application{
         pane.setOnMouseDragged(e -> {
             // int delay = 1000;
             // long start = System.currentTimeMillis();
-            
             // while (start >= System.currentTimeMillis() - delay); // sleeps for 1 second
             
             wang.animate(x,y);
             wang.setLayoutX(e.getX());
-            wang.setLayoutY(e.getY());
-
-            System.out.println(x + " " + y + " " + wang.getLayoutX() + " " + wang.getLayoutY());
-            
+            wang.setLayoutY(e.getY());          
         
         });
 
-        /*pane.setOnKeyPressed(e -> {
-
+        pane.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.UP) {
                 wang.setLayoutY(y + wang.animate(wang.getLayoutX(), wang.getLayoutY(), 1));
             }
@@ -88,10 +84,9 @@ public class Main extends Application{
             else if (e.getText().equals("1"))
                 pane.getChildren().add(wang.display());
             System.out.println(wang.getLayoutX() + " " + wang.getLayoutY());
-        });*/
+        });
         
-
-        pane.setOnKeyPressed(e -> {
+        /*pane.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.UP) 
                 wang.setLayoutY(wang.getLayoutY()-50);
             if (e.getCode() == KeyCode.DOWN)
@@ -100,7 +95,7 @@ public class Main extends Application{
                 wang.setLayoutX(wang.getLayoutX()-100);
             if (e.getCode() == KeyCode.RIGHT)
                 wang.setLayoutX(wang.getLayoutX()+100);            
-        });
+        });*/
         
 
         /*screen.setOnMouseMoved(e ->{
