@@ -81,7 +81,6 @@ public class Wang extends Pane{
     public void animate(int z) {
 
         Line line = new Line(x,y,x,y);
-        getChildren().add(line);
         line.setStroke(Color.CYAN);
 
         if (z == 1)
@@ -105,9 +104,8 @@ public class Wang extends Pane{
 
     }
 
-    public void animate(double x, double y) {
-        Line line = new Line(x, y, 1, 1);
-        //getChildren().add(line);
+    public void follow(double x, double y) {
+        Line line = new Line(this.x, this.y, x, y);
         line.setStroke(Color.CYAN);
         PathTransition pt = new PathTransition();
         pt.setDuration(Duration.millis(2000));
@@ -115,6 +113,8 @@ public class Wang extends Pane{
         pt.setNode(wang);
         pt.setCycleCount(1);
         pt.play();
+        this.x = x;
+        this.y = y;
 
     }
 
@@ -169,8 +169,6 @@ public class Wang extends Pane{
     public void start(double width, double height) {
         
         Line line = new Line(width/2, height + 50, width/2, height);
-        getChildren().add(line);
-        line.setStroke(Color.TRANSPARENT);
         PathTransition pt = new PathTransition();
         pt.setDuration(Duration.millis(2000));
         pt.setPath(line);
@@ -180,8 +178,6 @@ public class Wang extends Pane{
         pt.play();
         
         Line line2 = new Line(width/2, height, width/2, height / 2);
-        getChildren().add(line2);
-        line2.setStroke(Color.TRANSPARENT);
         PathTransition pt2 = new PathTransition();
         pt2.setDuration(Duration.millis(1000));
         pt2.setPath(line2);

@@ -2,10 +2,10 @@ import javafx.application.Application;
 import javafx.geometry.Bounds;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;  
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.BorderPane;  
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Screen;
@@ -13,12 +13,12 @@ import javafx.stage.Screen;
 
 
 public class Main extends Application{
-    public double clickCount = 0;
-    private double x;
-    private double y;
+    public static double clickCount = 0;
 
     @Override
     public void start(Stage ps) {
+        BorderPane bPane = new BorderPane();
+
         Pane pane = new Pane();
 
         Rectangle2D screenBounds = Screen.getPrimary().getBounds();
@@ -31,8 +31,6 @@ public class Main extends Application{
         pane.getChildren().add(wang);
         
         Bounds bounds = wang.localToScene(wang.getBoundsInLocal());        
-
-        
 
         wang.start(WIDTH,HEIGHT);
 
@@ -62,10 +60,7 @@ public class Main extends Application{
             // long start = System.currentTimeMillis();
             // while (start >= System.currentTimeMillis() - delay); // sleeps for 1 second
             
-            wang.animate(x,y);
-            wang.setLayoutX(e.getX());
-            wang.setLayoutY(e.getY());          
-        
+            wang.follow(e.getX(), e.getY());
         });
 
         pane.setOnKeyPressed(e -> {
