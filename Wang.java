@@ -117,6 +117,17 @@ public class Wang extends Pane{
 
     }
 
+    public void drop(double HEIGHT){
+        System.out.println("You're finally awake");
+        Line legR = (Line) wang.getChildren().get(4);
+        System.out.println("Leg:" + legR.getEndY());
+        System.out.println("Height:" + HEIGHT);
+        if(legR.getEndY() < HEIGHT){
+            System.out.println("gello");
+            animate(2);
+        }
+    }
+
     public void walk(double speed) {
         Arc arc = new Arc(0, 0, 10, 16, 250, 60);
         Arc arc2 = new Arc(0, 0, 10, 16, 300, -60);

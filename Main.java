@@ -8,6 +8,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.scene.shape.Line;
 import javafx.stage.Screen;
 
 
@@ -81,17 +82,15 @@ public class Main extends Application{
             // System.out.println(wang.getLayoutX() + " " + wang.getLayoutY());
         });
 
-        // pane.setOnMouseClicked(e -> {
-        //     clickCount++;
-        //     System.out.println(clickCount);
-        //     Line legR = (Line) wang.getChildren().get(2);
-        //     if(clickCount %4 == 2 || clickCount %4 != 3){
-        //         System.out.println("Ok boomer");
-        //         while (legR.getEndY() > HEIGHT){
-        //             wang.setLayoutY(wang.getLayoutY() - 50);
-        //         }
-        //     }
-        // });
+        pane.setOnMouseClicked(e -> {
+            clickCount++;
+            System.out.println(clickCount);
+            
+            if(clickCount %4 == 2 || clickCount %4 == 3){
+                System.out.println("Ok boomer");
+                wang.drop(HEIGHT);
+            }
+        });
         
         /*pane.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.UP) 
