@@ -1,1 +1,1 @@
-# Winter and Spring -> Summer Fall
+# Winter, Spring -> Summer amd Fall
