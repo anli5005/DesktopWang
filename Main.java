@@ -1,5 +1,4 @@
 import javafx.application.Application;
-import javafx.geometry.Bounds;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -8,7 +7,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.scene.shape.Line;
 import javafx.stage.Screen;
 
 
@@ -36,9 +34,6 @@ public class Main extends Application{
         wang.walk(700);
 
         pane.setOnMouseDragged(e -> {
-            // int delay = 1000;
-            // long start = System.currentTimeMillis();
-            // while (start >= System.currentTimeMillis() - delay); // sleeps for 1 second
             
             wang.follow(e.getX(), e.getY());
 
@@ -47,16 +42,30 @@ public class Main extends Application{
         pane.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.UP) 
                 wang.animate(1);
-                
+
             else if (e.getCode() == KeyCode.DOWN) 
                 wang.animate(2);
             
-            else if (e.getCode() == KeyCode.LEFT) 
-                wang.animate(3);
-            
-            else if (e.getCode() == KeyCode.RIGHT) 
-                wang.animate(4);
+            else if (e.getCode() == KeyCode.LEFT) {
+                if (wang.animate(3) == 1) {
+                    bPane.setLeft(wang.display());   
+                    /*int delay = 5000;
+                    long start = System.currentTimeMillis();
+                    while (start >= System.currentTimeMillis() - delay);
+                    bPane.setLeft(null);*/ 
+                }
+            }
 
+            else if (e.getCode() == KeyCode.RIGHT) {
+                if (wang.animate(4) == 2) {
+                    bPane.setRight(wang.display());
+                    /*int delay = 5000;
+                    long start = System.currentTimeMillis();
+                    while (start >= System.currentTimeMillis() - delay); 
+                    bPane.setRight(null);*/
+                }
+            }
+                
         });
 
         pane.setOnMouseClicked(e -> {
@@ -69,46 +78,6 @@ public class Main extends Application{
             }
         });
         
-        /*screen.setOnMouseMoved(e ->{
-            double centerY = body.getY() + (body.getHeight() / 2);
-            double side1 = Math.abs(e.getY() - centerY);
-            double centerX = body.getX() + (body.getWidth() / 2);
-            double side2 = Math.abs(e.getX() - centerX);
-            // if(side1 < side2){
-            //     double temp;
-            //     temp = side1;
-            //     side1 = side2;
-            //     side2 = temp;
-            // }
-            if(side1 != 0 && side2 != 0){
-                double angle = 0;
-                if(side1 > side2){
-                    angle = Math.asin(side2 / side1);
-                }
-                else{
-                    angle = Math.asin(side1 / side2);
-                }
-                angle *= 100;
-                System.out.printf("side1: %f, side2: %f, angle: %f\n", side1, side2, angle);
-                if(e.getX() > centerX && e.getY() < centerY){
-                    body.setRotate(angle * -1);
-                    imgV.setRotate(angle * -1);
-                }
-                else if(e.getX() < centerX && e.getY() < centerY){
-                    body.setRotate(angle);
-                    imgV.setRotate(angle);
-                }
-                else if(e.getX() > centerX && e.getY() > centerY){
-                    body.setRotate(angle);
-                    imgV.setRotate(angle);
-                }
-                else if(e.getX() < centerX && e.getY() > centerY){
-                    body.setRotate(angle * -1);
-                    imgV.setRotate(angle * -1);
-                }
-            }
-        });
-        */
         bPane.setCenter(pane);
 
         ps.initStyle(StageStyle.TRANSPARENT);

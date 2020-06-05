@@ -15,19 +15,15 @@ import javafx.scene.shape.Arc;
 public class Wang extends Pane {
 
     private Group wang = new Group();
-    private final double dx = 100, dy = 65;
+    private final double dx = 150, dy = 65;
     private double x, y;
-    private String[] files = {"wang.png"};
+    private String[] files = {"wang.png","statecapitalquiz.png"};
     private double WIDTH,HEIGHT;
-    private double wangWidth, wangHeight;
 
     public Wang(double wid, double hig){
         ImageView imgV = new ImageView(new Image("wang.png"));
         imgV.setFitWidth(wid);
         imgV.setFitHeight(hig);
-        wangWidth = imgV.getFitWidth();
-        wangHeight = imgV.getFitHeight();
-
         Line body = new Line(), armL = new Line(), armR = new Line(), legL = new Line(), legR = new Line();
         Line[] lines = {body, armL, armR, legL, legR};
                 
@@ -81,7 +77,7 @@ public class Wang extends Pane {
         this.y = y;
     }
     
-    public void animate(int z) {
+    public int animate(int z) {
 
         Line line = new Line(x,y,x,y);
         line.setStroke(Color.CYAN);
@@ -95,16 +91,16 @@ public class Wang extends Pane {
         else if (z == 4) 
             line.setEndX(x+dx);
 
-        if (line.getEndX() > WIDTH - wangWidth) {
-            line.setEndX(WIDTH - wangWidth);
-            //display(2); 
-        } else if (line.getEndX() < wangWidth) {
-            line.setEndX(wangWidth);
-            //display(1);
-        } else if (line.getEndY() > HEIGHT - wangHeight) {
-            line.setEndY(HEIGHT - wangHeight);
-        } else if (line.getEndY() < wangHeight) {
-            line.setEndY(wangHeight);
+        if (line.getEndX() > WIDTH) { 
+            line.setEndX(WIDTH/2);
+            return 2;
+        } else if (line.getEndX() < 0) {
+            line.setEndX(WIDTH/2);
+            return 1;
+        } else if (line.getEndY() > HEIGHT) {
+            line.setEndY(HEIGHT/2);
+        } else if (line.getEndY() < 0) {
+            line.setEndY(HEIGHT/2);
         }
         
         PathTransition pt = new PathTransition();
@@ -116,6 +112,8 @@ public class Wang extends Pane {
 
         x = line.getEndX();
         y = line.getEndY();
+
+        return -1;
     }
 
     public void follow(double x, double y) {
@@ -135,9 +133,8 @@ public class Wang extends Pane {
     public void drop(double HEIGHT){
         System.out.println("You're finally awake");
         Line legR = (Line) wang.getChildren().get(4);
-        System.out.println("Leg:" + legR.getEndY());
-        System.out.println("Height:" + HEIGHT);
-        if(legR.getEndY() < HEIGHT){
+        System.out.println("Leg:" + y);
+        if (y < HEIGHT){
             System.out.println("gello");
             animate(2);
         }
@@ -164,7 +161,7 @@ public class Wang extends Pane {
         PathTransition walking1 = new PathTransition();
         walking1.setDuration(Duration.millis(speed));
         walking1.setPath(arc);
-        walking1.setNode(wang.getChildren().get(3));
+        walking1.setNode(legL);
         walking1.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
         walking1.setCycleCount(Timeline.INDEFINITE);
         walking1.setAutoReverse(true);
@@ -173,19 +170,19 @@ public class Wang extends Pane {
         PathTransition walking2 = new PathTransition();
         walking2.setDuration(Duration.millis(speed));
         walking2.setPath(arc2);
-        walking2.setNode(wang.getChildren().get(4));
+        walking2.setNode(legR);
         walking2.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
         walking2.setCycleCount(Timeline.INDEFINITE);
         walking2.setAutoReverse(true);
         walking2.play();
     }
 
-    public ImageView display(int x) {
+    public ImageView display() {
         Random rand = new Random();
         String file = files[rand.nextInt(files.length)];
-        ImageView imgV = new ImageView(new Image(file));
-        imgV.setFitHeight(500);
-        imgV.setFitWidth(500);
+        Image img = new Image(file);
+        ImageView imgV = new ImageView(img);
+
         return imgV;
     }
 
