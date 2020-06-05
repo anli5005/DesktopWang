@@ -34,7 +34,7 @@ public class Main extends Application{
 
         wang.start(WIDTH,HEIGHT);
 
-        //wang.walk(700);
+        wang.walk(700);
         //double centerX = (boundsInScreen.getMaxX() + boundsInScreen.getMinX()) / 2;
         //double centerY = (boundsInScreen.getMaxY() + boundsInScreen.getMinY()) / 2;
         //double centerX = boundsInScreen.getWidth();

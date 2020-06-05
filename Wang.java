@@ -119,8 +119,8 @@ public class Wang extends Pane{
     }
 
     public void walk(double speed) {
-        Arc arc = new Arc(0, 0, 11, 11, 250, 50);
-        Arc arc2 = new Arc(0, 0, 11, 11, 300, -50);
+        Arc arc = new Arc(0, 0, 10, 16, 250, 60);
+        Arc arc2 = new Arc(0, 0, 10, 16, 300, -60);
         Line legL = (Line) wang.getChildren().get(3);
         Line legR = (Line) wang.getChildren().get(4);
         //System.out.println("LegL " + legL);
