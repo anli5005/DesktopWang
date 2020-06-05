@@ -30,30 +30,9 @@ public class Main extends Application{
         Wang wang = new Wang(wid, hig);
         pane.getChildren().add(wang);
         
-        Bounds bounds = wang.localToScene(wang.getBoundsInLocal());        
-
         wang.start(WIDTH,HEIGHT);
 
-        //wang.walk(700);
-        //double centerX = (boundsInScreen.getMaxX() + boundsInScreen.getMinX()) / 2;
-        //double centerY = (boundsInScreen.getMaxY() + boundsInScreen.getMinY()) / 2;
-        //double centerX = boundsInScreen.getWidth();
-        //double centerY = boundsInScreen.getHeight();
-
-        /*Rectangle screen = new Rectangle(-100, -100, WIDTH, HEIGHT);
-        screen.setFill(Color.WHITE);
-        pane.getChildren().add(screen);
-        
-
-        Rectangle body = new Rectangle(wid / 2 - 10, hig - 10, 20, 90);
-        body.setFill(Color.BLACK);
-        pane.getChildren().add(body);
-        */
-
-        //screen.setOnMouseClicked(e -> {
-          //  wang.animate(boundsInScreen.getWidth(), e.getX(), boundsInScreen.getHeight(), e.getY());
-        //});
-        
+        wang.walk(700);
 
         pane.setOnMouseDragged(e -> {
             // int delay = 1000;
@@ -61,12 +40,13 @@ public class Main extends Application{
             // while (start >= System.currentTimeMillis() - delay); // sleeps for 1 second
             
             wang.follow(e.getX(), e.getY());
+
         });
 
         pane.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.UP) 
                 wang.animate(1);
-        
+                
             else if (e.getCode() == KeyCode.DOWN) 
                 wang.animate(2);
             
@@ -75,10 +55,7 @@ public class Main extends Application{
             
             else if (e.getCode() == KeyCode.RIGHT) 
                 wang.animate(4);
-            
-            //else if (e.getText().equals("1"))
-              //  pane.getChildren().add(wang.display());
-            // System.out.println(wang.getLayoutX() + " " + wang.getLayoutY());
+
         });
 
         // pane.setOnMouseClicked(e -> {
@@ -93,18 +70,6 @@ public class Main extends Application{
         //     }
         // });
         
-        /*pane.setOnKeyPressed(e -> {
-            if (e.getCode() == KeyCode.UP) 
-                wang.setLayoutY(wang.getLayoutY()-50);
-            if (e.getCode() == KeyCode.DOWN)
-                wang.setLayoutY(wang.getLayoutY()+50);
-            if (e.getCode() == KeyCode.LEFT)
-                wang.setLayoutX(wang.getLayoutX()-100);
-            if (e.getCode() == KeyCode.RIGHT)
-                wang.setLayoutX(wang.getLayoutX()+100);            
-        });*/
-        
-
         /*screen.setOnMouseMoved(e ->{
             double centerY = body.getY() + (body.getHeight() / 2);
             double side1 = Math.abs(e.getY() - centerY);
@@ -145,9 +110,11 @@ public class Main extends Application{
             }
         });
         */
+        bPane.setCenter(pane);
+
         ps.initStyle(StageStyle.TRANSPARENT);
         ps.setAlwaysOnTop(true);
-        Scene scene = new Scene(pane, WIDTH, HEIGHT);
+        Scene scene = new Scene(bPane, WIDTH, HEIGHT);
         scene.setFill(Color.TRANSPARENT);
         ps.setTitle("DesktopWang");
         ps.setScene(scene);

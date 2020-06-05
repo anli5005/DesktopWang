@@ -4,7 +4,6 @@ import javafx.animation.PathTransition;
 import javafx.animation.SequentialTransition;
 import javafx.animation.Timeline;
 import javafx.scene.Group;
-//import javafx.scene.shape.Rectangle;
 import javafx.scene.layout.Pane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -13,17 +12,21 @@ import javafx.scene.shape.Line;
 import javafx.util.Duration;
 import javafx.scene.shape.Arc;
 
-public class Wang extends Pane{
+public class Wang extends Pane {
 
     private Group wang = new Group();
     private final double dx = 100, dy = 65;
     private double x, y;
-    private String[] external = {"wang.png"};
+    private String[] files = {"wang.png"};
+    private double WIDTH,HEIGHT;
+    private double wangWidth, wangHeight;
 
     public Wang(double wid, double hig){
         ImageView imgV = new ImageView(new Image("wang.png"));
         imgV.setFitWidth(wid);
         imgV.setFitHeight(hig);
+        wangWidth = imgV.getFitWidth();
+        wangHeight = imgV.getFitHeight();
 
         Line body = new Line(), armL = new Line(), armR = new Line(), legL = new Line(), legR = new Line();
         Line[] lines = {body, armL, armR, legL, legR};
@@ -92,6 +95,18 @@ public class Wang extends Pane{
         else if (z == 4) 
             line.setEndX(x+dx);
 
+        if (line.getEndX() > WIDTH - wangWidth) {
+            line.setEndX(WIDTH - wangWidth);
+            //display(2); 
+        } else if (line.getEndX() < wangWidth) {
+            line.setEndX(wangWidth);
+            //display(1);
+        } else if (line.getEndY() > HEIGHT - wangHeight) {
+            line.setEndY(HEIGHT - wangHeight);
+        } else if (line.getEndY() < wangHeight) {
+            line.setEndY(wangHeight);
+        }
+        
         PathTransition pt = new PathTransition();
         pt.setDuration(Duration.millis(500));
         pt.setPath(line);
@@ -101,7 +116,6 @@ public class Wang extends Pane{
 
         x = line.getEndX();
         y = line.getEndY();
-
     }
 
     public void follow(double x, double y) {
@@ -157,9 +171,9 @@ public class Wang extends Pane{
         walking2.play();
     }
 
-    public ImageView display() {
+    public ImageView display(int x) {
         Random rand = new Random();
-        String file = external[rand.nextInt(external.length)];
+        String file = files[rand.nextInt(files.length)];
         ImageView imgV = new ImageView(new Image(file));
         imgV.setFitHeight(500);
         imgV.setFitWidth(500);
@@ -189,5 +203,7 @@ public class Wang extends Pane{
 
         x = width/2;
         y = height/2;
+        WIDTH = width;
+        HEIGHT = height;
     }
 }
