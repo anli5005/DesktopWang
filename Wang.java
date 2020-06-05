@@ -4,7 +4,6 @@ import javafx.animation.PathTransition;
 import javafx.animation.SequentialTransition;
 import javafx.animation.Timeline;
 import javafx.scene.Group;
-//import javafx.scene.shape.Rectangle;
 import javafx.scene.layout.Pane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -123,8 +122,6 @@ public class Wang extends Pane{
         Arc arc2 = new Arc(0, 0, 10, 16, 300, -60);
         Line legL = (Line) wang.getChildren().get(3);
         Line legR = (Line) wang.getChildren().get(4);
-        //System.out.println("LegL " + legL);
-        //System.out.println("LegR " + legR);
 
         arc.centerXProperty().bind(legL.startXProperty());
         arc.centerYProperty().bind(legL.startYProperty());

@@ -104,47 +104,6 @@ public class Main extends Application{
                 wang.setLayoutX(wang.getLayoutX()+100);            
         });*/
         
-
-        /*screen.setOnMouseMoved(e ->{
-            double centerY = body.getY() + (body.getHeight() / 2);
-            double side1 = Math.abs(e.getY() - centerY);
-            double centerX = body.getX() + (body.getWidth() / 2);
-            double side2 = Math.abs(e.getX() - centerX);
-            // if(side1 < side2){
-            //     double temp;
-            //     temp = side1;
-            //     side1 = side2;
-            //     side2 = temp;
-            // }
-            if(side1 != 0 && side2 != 0){
-                double angle = 0;
-                if(side1 > side2){
-                    angle = Math.asin(side2 / side1);
-                }
-                else{
-                    angle = Math.asin(side1 / side2);
-                }
-                angle *= 100;
-                System.out.printf("side1: %f, side2: %f, angle: %f\n", side1, side2, angle);
-                if(e.getX() > centerX && e.getY() < centerY){
-                    body.setRotate(angle * -1);
-                    imgV.setRotate(angle * -1);
-                }
-                else if(e.getX() < centerX && e.getY() < centerY){
-                    body.setRotate(angle);
-                    imgV.setRotate(angle);
-                }
-                else if(e.getX() > centerX && e.getY() > centerY){
-                    body.setRotate(angle);
-                    imgV.setRotate(angle);
-                }
-                else if(e.getX() < centerX && e.getY() > centerY){
-                    body.setRotate(angle * -1);
-                    imgV.setRotate(angle * -1);
-                }
-            }
-        });
-        */
         ps.initStyle(StageStyle.TRANSPARENT);
         ps.setAlwaysOnTop(true);
         Scene scene = new Scene(pane, WIDTH, HEIGHT);
