@@ -12,7 +12,9 @@ import javafx.stage.Screen;
 
 
 public class Main extends Application{
+    
     public static double clickCount = 0;
+
 
     @Override
     public void start(Stage ps) {
@@ -27,6 +29,9 @@ public class Main extends Application{
         final double hig = HEIGHT / 781 * 100;
 
         Wang wang = new Wang(wid, hig);
+        //StateCapitalQuiz SCQ = new StateCapitalQuiz();
+        //bPane.setTop(SCQ);
+       
         pane.getChildren().add(wang);
         
         wang.start(WIDTH,HEIGHT);
@@ -64,6 +69,12 @@ public class Main extends Application{
                     while (start >= System.currentTimeMillis() - delay); 
                     bPane.setRight(null);*/
                 }
+
+            }
+
+            else if (e.getText().equals("1")) {
+                
+                //SCQ.showInputDialog();
             }
                 
         });
@@ -89,5 +100,6 @@ public class Main extends Application{
         ps.show();
 
         wang.requestFocus();
+        //SCQ.requestFocus();
     }
 }
