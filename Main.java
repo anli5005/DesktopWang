@@ -30,7 +30,7 @@ public class Main extends Application{
 
         Wang wang = new Wang(wid, hig);
         //StateCapitalQuiz SCQ = new StateCapitalQuiz();
-        //bPane.setTop(SCQ);
+        // bPane.setTop(SCQ);
        
         pane.getChildren().add(wang);
         
@@ -70,13 +70,7 @@ public class Main extends Application{
                     bPane.setRight(null);*/
                 }
 
-            }
-
-            else if (e.getText().equals("1")) {
-                
-                //SCQ.showInputDialog();
-            }
-                
+            }               
         });
 
         pane.setOnMouseClicked(e -> {

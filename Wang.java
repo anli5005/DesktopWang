@@ -17,7 +17,6 @@ public class Wang extends Pane {
     private Group wang = new Group();
     private final double dx = 150, dy = 65;
     private double x, y;
-    private String[] files = {"wang.png","statecapitalquiz.png"};
     private double WIDTH,HEIGHT;
 
     public Wang(double wid, double hig){
@@ -179,7 +178,7 @@ public class Wang extends Pane {
 
     public ImageView display() {
         Random rand = new Random();
-        String file = files[rand.nextInt(files.length)];
+        String file = "theStash/" + (rand.nextInt(7) + 1) + ".png";
         Image img = new Image(file);
         ImageView imgV = new ImageView(img);
 
