@@ -1,10 +1,10 @@
-package Maze;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class MazeAnimator extends JPanel implements Runnable{
-    private int panelWidth, panelHeight, leftWall, topWall;
+	private static final long serialVersionUID = 1L;
+	private int panelWidth, panelHeight, leftWall, topWall;
     MazeSolver solver = new MazeSolver();
 
     public MazeAnimator() {
@@ -64,7 +64,7 @@ public class MazeAnimator extends JPanel implements Runnable{
 
     /* While-loop to repeatedly generate, solve, and animate a new maze until the user makes it force-quit */
     public void run() {
-        int sleepTime = 1000;
+        int sleepTime = 99999999;
         while (true) {
             MazeGenerator.generateMaze();
             solver.solveMaze(1,1);

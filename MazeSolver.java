@@ -1,11 +1,10 @@
-package Maze;
 
 public class MazeSolver {
 
     /* Boolean function to return if the maze is solved or not. It is considered to be solved if the path of the maze
      * reaches the bottom right cell of the grid.  */
     public boolean solveMaze(int row, int column) {
-        int sleepTime = 10;
+        int sleepTime = 99;
         if (MazeGenerator.maze[row][column] == MazeGenerator.emptyCode) {
 
             /* Adds the cell to the path */

@@ -1,4 +1,3 @@
-package Maze;
 
 public class MazeGenerator {
     public static int [][] maze;
@@ -10,8 +9,8 @@ public class MazeGenerator {
     public final static int emptyCode = 3;
     public final static int visitedCode = 4;
 
-    public final static int rows = 51;
-    public final static int columns = 51;
+    public final static int rows = 35;
+    public final static int columns = 35;
     public final static int cellSize = 15;
     public static int mazeWidth, mazeHeight;
 
