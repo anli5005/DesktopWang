@@ -38,14 +38,16 @@ public class StateCapitalQuiz extends Pane {
 
         String[] parts = text.split(":");
         STATE = parts[0];
-        CAPITAL = parts[1];        
+        CAPITAL = parts[1];
+        
+        showInputDialog();
     }
 
     public void showInputDialog() {
         boolean correct = false;
         
         while (! correct) {
-            TextInputDialog dialog = new TextInputDialog("master PATH_TO_FX");
+            TextInputDialog dialog = new TextInputDialog("path2fx");
             dialog.setTitle("State Capital Quiz");
             dialog.setContentText("What is the capital of " + STATE);
 

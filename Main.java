@@ -1,6 +1,10 @@
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+//import javafx.scene.media.Media;
+// import javafx.scene.media.MediaPlayer;
+// import javafx.scene.control.Alert;
+// import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;  
 import javafx.scene.layout.Pane;
@@ -14,12 +18,16 @@ import javafx.stage.Screen;
 public class Main extends Application{
     
     public static double clickCount = 0;
-
+    public static int moves = 0;
 
     @Override
     public void start(Stage ps) {
-        BorderPane bPane = new BorderPane();
 
+        //showInformationDialog();
+        
+
+        BorderPane bPane = new BorderPane();
+        
         Pane pane = new Pane();
 
         Rectangle2D screenBounds = Screen.getPrimary().getBounds();
@@ -54,6 +62,7 @@ public class Main extends Application{
             else if (e.getCode() == KeyCode.LEFT) {
                 if (wang.animate(3) == 1) {
                     bPane.setLeft(wang.display());   
+                    wang.toFront();
                     /*int delay = 5000;
                     long start = System.currentTimeMillis();
                     while (start >= System.currentTimeMillis() - delay);
@@ -64,13 +73,31 @@ public class Main extends Application{
             else if (e.getCode() == KeyCode.RIGHT) {
                 if (wang.animate(4) == 2) {
                     bPane.setRight(wang.display());
+                    wang.toFront();
                     /*int delay = 5000;
                     long start = System.currentTimeMillis();
                     while (start >= System.currentTimeMillis() - delay); 
                     bPane.setRight(null);*/
                 }
 
-            }               
+            }
+            moves++;
+            if (moves == 5) {
+                //wang.fade((ImageView) bPane.getLeft(), (ImageView) bPane.getRight());
+                
+                if (bPane.getLeft() != null)
+                    bPane.setLeft(null);
+                
+                if (bPane.getRight() != null)
+                    bPane.setRight(null);
+                
+                moves = 0;
+            }     
+
+            if (e.getText().equals("1")) {
+                wang.sound();
+            }
+
         });
 
         pane.setOnMouseClicked(e -> {
@@ -84,6 +111,7 @@ public class Main extends Application{
         });
         
         bPane.setCenter(pane);
+        bPane.getCenter().toFront();
 
         ps.initStyle(StageStyle.TRANSPARENT);
         ps.setAlwaysOnTop(true);
@@ -96,4 +124,14 @@ public class Main extends Application{
         wang.requestFocus();
         //SCQ.requestFocus();
     }
+
+    /*public static void showInformationDialog() {
+        Alert alert = new Alert(AlertType.INFORMATION); 
+        alert.setTitle("Info");
+        alert.setHeaderText("Pee");
+        alert.setContentText("Message");
+        alert.show();
+    }*/
+
+
 }
