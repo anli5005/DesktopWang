@@ -178,7 +178,7 @@ public class Wang extends Pane {
 
     public ImageView display() {
         Random rand = new Random();
-        String file = "theStash/" + (rand.nextInt(7) + 1) + ".png";
+        String file = "theStash/" + (rand.nextInt(8) + 1) + ".png";
         Image img = new Image(file);
         ImageView imgV = new ImageView(img);
 
