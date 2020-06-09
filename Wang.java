@@ -137,11 +137,11 @@ public class Wang extends Pane {
     }
 
     public void drop(double HEIGHT){
-        System.out.println("You're finally awake");
+        //System.out.println("You're finally awake");
         Line legR = (Line) wang.getChildren().get(4);
-        System.out.println("Leg:" + y);
+        //System.out.println("Leg:" + y);
         if (y < HEIGHT){
-            System.out.println("gello");
+            //System.out.println("gello");
             animate(2);
         }
     }
@@ -183,38 +183,12 @@ public class Wang extends Pane {
         walking2.play();
     }
 
-    public ImageView display() {
-        Random rand = new Random();
-        String file = "theStash/" + (rand.nextInt(7) + 1) + ".png";
-        
-        Image img = new Image(file);
-        double wid = img.getWidth();
-        double hig = img.getHeight();
-        //System.out.println(wid + " " + hig);
 
-        wang.toFront();
-
-        ImageView imgV = new ImageView(img);
-        if (wid < 1000) {
-            imgV.setFitHeight(hig/1.5);
-            imgV.setFitWidth(wid/1.5);
-        }
-        else {
-            imgV.setFitHeight(hig/4);
-            imgV.setFitWidth(hig/4);
-        }
-        
-        return imgV;
-    }
-
-    public void video() {
-
-    }
 
     public void sound() {
         Random rand = new Random();
 
-        AudioClip sound = new AudioClip(this.getClass().getResource("asmr/" + (rand.nextInt(1)  + 1) + ".m4a").toString());
+        AudioClip sound = new AudioClip(this.getClass().getResource("asmr/" + (rand.nextInt(3) + 1) + ".m4a").toString());
         sound.play();
     }
 
