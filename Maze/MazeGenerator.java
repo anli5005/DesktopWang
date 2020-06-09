@@ -1,3 +1,4 @@
+package Maze;
 
 public class MazeGenerator {
     public static int [][] maze;
