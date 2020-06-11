@@ -42,7 +42,8 @@ public class Main extends Application {
         wang.start(WIDTH, HEIGHT);
 
         wang.walk(700);
-        wang.activate();
+        //wang.activate();
+        wang.wander();
 
         pane.setOnMouseDragged(e -> {
 
@@ -51,7 +52,7 @@ public class Main extends Application {
         });
 
         pane.setOnKeyPressed(e -> {
-            if (e.getCode() == KeyCode.UP) {
+            /*if (e.getCode() == KeyCode.UP) {
                 if (wang.animate(1) == 3)
                     new Videos();
             }
@@ -69,7 +70,7 @@ public class Main extends Application {
                     new Images(WIDTH,HEIGHT);
                 }
 
-            } if (e.getText().equals("1")) {
+            } */if (e.getText().equals("1")) {
                 wang.sound();
             } if (e.getText().equals("2")) {
                 //popup.show(ps);
@@ -78,14 +79,14 @@ public class Main extends Application {
             } 
         });
 
-        pane.setOnMouseClicked(e -> {
+        /*pane.setOnMouseClicked(e -> {
             clickCount++;
             //System.out.println(clickCount);
             if (clickCount % 4 == 2 || clickCount % 4 == 3) {
                 // System.out.println("Ok boomer");
                 wang.drop(HEIGHT);
             }
-        });
+        }); */
    
         ps.initStyle(StageStyle.TRANSPARENT);
         ps.setAlwaysOnTop(true);
