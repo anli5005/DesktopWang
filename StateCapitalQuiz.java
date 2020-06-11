@@ -4,18 +4,25 @@ import java.util.Random;
 import java.util.Optional;
 import java.util.Random;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import javafx.scene.control.TextInputDialog;
 
 
-public class StateCapitalQuiz extends Pane {
+public class StateCapitalQuiz {
 
-    private final String STATE;
-    private final String CAPITAL;    
+    private String STATE;
+    private String CAPITAL;    
 
-    public StateCapitalQuiz() {
+    StateCapitalQuiz() {
+
+        Stage subStage = new Stage();
+        subStage.setTitle("State Capital Quiz");
+        
         Random rand = new Random();
         //https://www.codespeedy.com/read-a-specific-line-from-a-text-file-in-java/
         String text = "";
@@ -42,7 +49,7 @@ public class StateCapitalQuiz extends Pane {
         
         showInputDialog();
     }
-
+    
     public void showInputDialog() {
         boolean correct = false;
         

@@ -1,35 +1,34 @@
+
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-//import javafx.scene.media.Media;
-// import javafx.scene.media.MediaPlayer;
-// import javafx.scene.control.Alert;
-// import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.BorderPane;  
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Screen;
 
+public class Main extends Application {
 
-
-public class Main extends Application{
-    
     public static double clickCount = 0;
-    public static int moves = 0;
     
+=======
+>>>>>>> ffbd4fa3dcbf48f180d4d29b3d5eda2fa8c445b0
 
     @Override
     public void start(Stage ps) {
 
-        //showInformationDialog();
-        
-
-        BorderPane bPane = new BorderPane();
-        
+        // showInformationDialog();
         Pane pane = new Pane();
+
+        /*Label label = new Label("path2fx");
+        Popup popup = new Popup();
+        popup.getContent().add(label);
+        */
 
         Rectangle2D screenBounds = Screen.getPrimary().getBounds();
         final double WIDTH = screenBounds.getWidth();
@@ -38,101 +37,75 @@ public class Main extends Application{
         final double hig = HEIGHT / 781 * 100;
 
         Wang wang = new Wang(wid, hig);
-        //StateCapitalQuiz SCQ = new StateCapitalQuiz();
+        // StateCapitalQuiz SCQ = new StateCapitalQuiz();
         // bPane.setTop(SCQ);
-       
+
         pane.getChildren().add(wang);
+<<<<<<< HEAD
         
         wang.start(0,0);
+=======
+
+        wang.start(WIDTH, HEIGHT);
+
+        wang.walk(700);
+        wang.activate();
+>>>>>>> ffbd4fa3dcbf48f180d4d29b3d5eda2fa8c445b0
 
         pane.setOnMouseDragged(e -> {
-            
+
             wang.follow(e.getX(), e.getY());
 
         });
 
 
         pane.setOnKeyPressed(e -> {
-            if (e.getCode() == KeyCode.UP) 
-                wang.animate(1);
+            if (e.getCode() == KeyCode.UP) {
+                if (wang.animate(1) == 3)
+                    new Videos();
+            }
 
-            else if (e.getCode() == KeyCode.DOWN) 
+            else if (e.getCode() == KeyCode.DOWN)
                 wang.animate(2);
-            
+
             else if (e.getCode() == KeyCode.LEFT) {
                 if (wang.animate(3) == 1) {
-                    bPane.setLeft(wang.display());   
-                    wang.toFront();
-                    /*int delay = 5000;
-                    long start = System.currentTimeMillis();
-                    while (start >= System.currentTimeMillis() - delay);
-                    bPane.setLeft(null);*/ 
+                    new Images(WIDTH,HEIGHT);
                 }
-            }
 
-            else if (e.getCode() == KeyCode.RIGHT) {
+            } else if (e.getCode() == KeyCode.RIGHT) {
                 if (wang.animate(4) == 2) {
-                    bPane.setRight(wang.display());
-                    wang.toFront();
-                    /*int delay = 5000;
-                    long start = System.currentTimeMillis();
-                    while (start >= System.currentTimeMillis() - delay); 
-                    bPane.setRight(null);*/
+                    new Images(WIDTH,HEIGHT);
                 }
 
-            }
-
-            moves++;
-            if (moves == 5) {
-                //wang.fade((ImageView) bPane.getLeft(), (ImageView) bPane.getRight());
-                
-                if (bPane.getLeft() != null)
-                    bPane.setLeft(null);
-                
-                if (bPane.getRight() != null)
-                    bPane.setRight(null);
-                
-                moves = 0;
-            }     
-
-            if (e.getText().equals("1")) {
+            } if (e.getText().equals("1")) {
                 wang.sound();
-            }
-
+            } if (e.getText().equals("2")) {
+                //popup.show(ps);
+            } if (e.getText().equals("3")) {
+                wang.wander();
+            } 
         });
 
         pane.setOnMouseClicked(e -> {
             clickCount++;
-            System.out.println(clickCount);
-            
-            if(clickCount %4 == 2 || clickCount %4 == 3){
-                System.out.println("Ok boomer");
+            //System.out.println(clickCount);
+            if (clickCount % 4 == 2 || clickCount % 4 == 3) {
+                // System.out.println("Ok boomer");
                 wang.drop(HEIGHT);
             }
         });
-        
-        bPane.setCenter(pane);
-        bPane.getCenter().toFront();
-
+   
         ps.initStyle(StageStyle.TRANSPARENT);
         ps.setAlwaysOnTop(true);
-        Scene scene = new Scene(bPane, WIDTH, HEIGHT);
+        Scene scene = new Scene(pane, WIDTH, HEIGHT);
         scene.setFill(Color.TRANSPARENT);
         ps.setTitle("DesktopWang");
         ps.setScene(scene);
         ps.show();
 
         wang.requestFocus();
-        //SCQ.requestFocus();
+        // SCQ.requestFocus();
     }
-
-    /*public static void showInformationDialog() {
-        Alert alert = new Alert(AlertType.INFORMATION); 
-        alert.setTitle("Info");
-        alert.setHeaderText("Pee");
-        alert.setContentText("Message");
-        alert.show();
-    }*/
-
-
 }
+
