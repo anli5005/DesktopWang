@@ -106,9 +106,11 @@ public class Wang extends Pane {
         } 
         else if (selection == 12){
             sound();
-        }else if(selection == 13){
+            activate();
+        } else if(selection == 13){
             new Videos();
-        }else{
+            activate();
+        } else {
             System.out.println(selection);
             activate();
         }
