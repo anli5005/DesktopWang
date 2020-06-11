@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
@@ -73,7 +74,7 @@ public class Main extends Application {
                 //popup.show(ps);
             } if (e.getText().equals("3")) {
                 wang.wander();
-            }
+            } 
         });
 
         pane.setOnMouseClicked(e -> {
@@ -85,8 +86,6 @@ public class Main extends Application {
             }
         });
    
-        
-        
         ps.initStyle(StageStyle.TRANSPARENT);
         ps.setAlwaysOnTop(true);
         Scene scene = new Scene(pane, WIDTH, HEIGHT);
@@ -99,3 +98,4 @@ public class Main extends Application {
         // SCQ.requestFocus();
     }
 }
+

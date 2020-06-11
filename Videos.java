@@ -16,7 +16,7 @@ class Videos {
         Stage subStage = new Stage();
         subStage.setTitle("New Stage");
 
-        Media media = new Media((this.getClass().getResource("vids/" + (rand.nextInt(3) + 1) + ".mp4").toExternalForm()));
+        Media media = new Media((this.getClass().getResource("vids/" + (rand.nextInt(4) + 1) + ".mp4").toExternalForm()));
         MediaPlayer mp = new MediaPlayer(media);
         mp.setAutoPlay(true);
         MediaView mv = new MediaView(mp);
