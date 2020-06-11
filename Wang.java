@@ -1,16 +1,12 @@
 import javafx.util.Duration;
 import java.util.Random;
 
-import javafx.animation.FadeTransition;
 import javafx.animation.PathTransition;
 import javafx.animation.SequentialTransition;
 import javafx.animation.Timeline;
 import javafx.scene.Group;
 import javafx.scene.layout.Pane;
-
-import javafx.scene.media.*;
 import javafx.scene.media.AudioClip;
-
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
@@ -26,7 +22,7 @@ public class Wang extends Pane {
 
 
     public Wang(double wid, double hig){
-        ImageView imgV = new ImageView(new Image("wang.png"));
+        ImageView imgV = new ImageView(new Image("theStash/wang.png"));
         imgV.setFitWidth(wid);
         imgV.setFitHeight(hig);
         Line body = new Line(), armL = new Line(), armR = new Line(), legL = new Line(), legR = new Line();
@@ -81,6 +77,27 @@ public class Wang extends Pane {
     public void setY(double y) {
         this.y = y;
     }
+
+    public void wander() {
+        Random rand = new Random();
+        
+        double randX = rand.nextInt((int) WIDTH);
+        double randY = rand.nextInt((int) HEIGHT);
+        
+        Line line = new Line(x,y,randX,randY);
+        PathTransition pt = new PathTransition();
+        pt.setDuration(Duration.millis(2000));
+        pt.setPath(line);
+        pt.setNode(wang);
+        pt.setCycleCount(1);
+        pt.play();
+
+        x = line.getEndX();
+        y = line.getEndY();
+
+        pt.setOnFinished(e -> wander());
+        
+    }
     
     public int animate(int z) {
 
@@ -106,6 +123,7 @@ public class Wang extends Pane {
             line.setEndY(HEIGHT/2);
         } else if (line.getEndY() < 0) {
             line.setEndY(HEIGHT/2);
+            return 3;
         }
         
         PathTransition pt = new PathTransition();
@@ -219,4 +237,5 @@ public class Wang extends Pane {
         WIDTH = width;
         HEIGHT = height;
     }
+    
 }

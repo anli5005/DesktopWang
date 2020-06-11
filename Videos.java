@@ -7,6 +7,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 
+
 class Videos {
 
     Videos() {
@@ -15,16 +16,17 @@ class Videos {
         Stage subStage = new Stage();
         subStage.setTitle("New Stage");
 
-        Media media = new Media((this.getClass().getResource("vids/" + (rand.nextInt(1) + 1) + ".mp4").toExternalForm()));
+        Media media = new Media((this.getClass().getResource("vids/" + (rand.nextInt(3) + 1) + ".mp4").toExternalForm()));
         MediaPlayer mp = new MediaPlayer(media);
         mp.setAutoPlay(true);
         MediaView mv = new MediaView(mp);
 
         Group root = new Group();  
-        root.getChildren().add(mv);  
+        root.getChildren().add(mv);
+
         Scene scene = new Scene(root,600,360);  
         subStage.setScene(scene);  
-        subStage.setTitle("Playing video");  
+        subStage.setTitle("Im sorry if this is a Rick Roll");  
         subStage.show();  
     }  
     
