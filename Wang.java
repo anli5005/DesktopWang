@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Arc;
+import java.util.concurrent.TimeUnit;
 
 public class Wang extends Pane {
 
@@ -81,12 +82,12 @@ public class Wang extends Pane {
     public void wander() {
         Random rand = new Random();
         
-        double randX = rand.nextInt((int) WIDTH);
-        double randY = rand.nextInt((int) HEIGHT);
+        int randX = rand.nextInt((int) WIDTH);
+        int randY = rand.nextInt((int) HEIGHT);
         
         Line line = new Line(x,y,randX,randY);
         PathTransition pt = new PathTransition();
-        pt.setDuration(Duration.millis(2000));
+        pt.setDuration(Duration.millis(3000));
         pt.setPath(line);
         pt.setNode(wang);
         pt.setCycleCount(1);
@@ -95,8 +96,22 @@ public class Wang extends Pane {
         x = line.getEndX();
         y = line.getEndY();
 
-        pt.setOnFinished(e -> wander());
-        
+        pt.setOnFinished(e -> activate());
+    }
+    public void activate() {
+        Random rand = new Random();
+        int selection = rand.nextInt(20);
+        if(selection < 5){
+            wander();
+        } 
+        else if (selection == 12){
+            sound();
+        }else if(selection == 13){
+            new Videos();
+        }else{
+            System.out.println(selection);
+            activate();
+        }
     }
     
     public int animate(int z) {
@@ -208,6 +223,7 @@ public class Wang extends Pane {
 
         AudioClip sound = new AudioClip(this.getClass().getResource("asmr/" + (rand.nextInt(3) + 1) + ".m4a").toString());
         sound.play();
+        activate();
     }
 
     public void start(double width, double height) {

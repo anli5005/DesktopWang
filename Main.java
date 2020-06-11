@@ -42,6 +42,7 @@ public class Main extends Application {
         wang.start(WIDTH, HEIGHT);
 
         wang.walk(700);
+        wang.activate();
 
         pane.setOnMouseDragged(e -> {
 
