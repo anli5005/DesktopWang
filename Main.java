@@ -41,6 +41,7 @@ public class Main extends Application {
         wang.start(WIDTH, HEIGHT);
 
         wang.walk(700);
+        wang.activate();
 
         pane.setOnMouseDragged(e -> {
 
@@ -99,3 +100,8 @@ public class Main extends Application {
         // SCQ.requestFocus();
     }
 }
+
+/*
+Ayo gamers, capitalism is kinda cringe bro. How come some people can be rich and others be poor. Communism for life dawgs!! Hi, Im richard wright, an african american from the south who 
+fled from racism to the north to pursue my dreams of becomming a writer. All my life i have been poor, and thats bad. Thats why i love communism!
+*/
