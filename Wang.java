@@ -12,7 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Arc;
-import java.util.concurrent.TimeUnit;
+import java.lang.Thread;
 
 public class Wang extends Pane {
 
@@ -95,8 +95,18 @@ public class Wang extends Pane {
 
         x = line.getEndX();
         y = line.getEndY();
-
-        pt.setOnFinished(e -> activate());
+        
+        pt.setOnFinished(e -> {
+            shleep();
+            activate();
+        });
+    }
+    public void shleep(){
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ie) {
+            Thread.currentThread().interrupt();
+        }
     }
     public void activate() {
         Random rand = new Random();
@@ -106,12 +116,15 @@ public class Wang extends Pane {
         } 
         else if (selection == 12){
             sound();
+            shleep();
             activate();
         } else if(selection == 13){
             new Videos();
+            shleep();
             activate();
         } else {
             System.out.println(selection);
+            shleep();
             activate();
         }
     }
