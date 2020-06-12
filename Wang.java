@@ -12,6 +12,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Arc;
+
+import java.io.File;
 import java.lang.Thread;
 
 public class Wang extends Pane {
@@ -23,7 +25,7 @@ public class Wang extends Pane {
 
 
     public Wang(double wid, double hig){
-        ImageView imgV = new ImageView(new Image("theStash/wang.png"));
+        ImageView imgV = new ImageView(new Image("wang.png"));
         imgV.setFitWidth(wid);
         imgV.setFitHeight(hig);
         Line body = new Line(), armL = new Line(), armR = new Line(), legL = new Line(), legR = new Line();
@@ -261,8 +263,9 @@ public class Wang extends Pane {
 
     public void sound() {
         Random rand = new Random();
+        int upperBound = new File("asmr").listFiles().length;
 
-        AudioClip sound = new AudioClip(this.getClass().getResource("asmr/" + (rand.nextInt(3) + 1) + ".m4a").toString());
+        AudioClip sound = new AudioClip(this.getClass().getResource("asmr/" + (rand.nextInt(upperBound) + 1) + ".m4a").toString());
         sound.play();
         //activate();
     }
