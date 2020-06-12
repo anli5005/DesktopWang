@@ -15,9 +15,6 @@ import javafx.stage.Screen;
 public class Main extends Application {
 
     public static double clickCount = 0;
-    
-=======
->>>>>>> ffbd4fa3dcbf48f180d4d29b3d5eda2fa8c445b0
 
     @Override
     public void start(Stage ps) {
@@ -41,16 +38,12 @@ public class Main extends Application {
         // bPane.setTop(SCQ);
 
         pane.getChildren().add(wang);
-<<<<<<< HEAD
-        
-        wang.start(0,0);
-=======
 
         wang.start(WIDTH, HEIGHT);
 
         wang.walk(700);
-        wang.activate();
->>>>>>> ffbd4fa3dcbf48f180d4d29b3d5eda2fa8c445b0
+        //wang.activate();
+        wang.wander();
 
         pane.setOnMouseDragged(e -> {
 
@@ -58,26 +51,40 @@ public class Main extends Application {
 
         });
 
-
         pane.setOnKeyPressed(e -> {
-            if (e.getCode() == KeyCode.UP) {
+            /*if (e.getCode() == KeyCode.UP) {
                 if (wang.animate(1) == 3)
                     new Videos();
             }
-
             else if (e.getCode() == KeyCode.DOWN)
                 wang.animate(2);
-
             else if (e.getCode() == KeyCode.LEFT) {
                 if (wang.animate(3) == 1) {
                     new Images(WIDTH,HEIGHT);
                 }
-
             } else if (e.getCode() == KeyCode.RIGHT) {
                 if (wang.animate(4) == 2) {
                     new Images(WIDTH,HEIGHT);
                 }
 
+<<<<<<< HEAD
+            }
+
+            moves++;
+            if (moves == 5) {
+                //wang.fade((ImageView) bPane.getLeft(), (ImageView) bPane.getRight());
+                
+                if (bPane.getLeft() != null)
+                    bPane.setLeft(null);
+                
+                if (bPane.getRight() != null)
+                    bPane.setRight(null);
+                
+                moves = 0;
+            }     
+
+            if (e.getText().equals("1")) {
+=======
             } if (e.getText().equals("1")) {
                 wang.sound();
             } if (e.getText().equals("2")) {
@@ -108,4 +115,3 @@ public class Main extends Application {
         // SCQ.requestFocus();
     }
 }
-
