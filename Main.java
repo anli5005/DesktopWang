@@ -1,4 +1,3 @@
-
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
@@ -66,26 +65,7 @@ public class Main extends Application {
                 if (wang.animate(4) == 2) {
                     new Images(WIDTH,HEIGHT);
                 }
-
-<<<<<<< HEAD
-            }
-
-            moves++;
-            if (moves == 5) {
-                //wang.fade((ImageView) bPane.getLeft(), (ImageView) bPane.getRight());
-                
-                if (bPane.getLeft() != null)
-                    bPane.setLeft(null);
-                
-                if (bPane.getRight() != null)
-                    bPane.setRight(null);
-                
-                moves = 0;
-            }     
-
-            if (e.getText().equals("1")) {
-=======
-            } if (e.getText().equals("1")) {
+            } */if (e.getText().equals("1")) {
                 wang.sound();
             } if (e.getText().equals("2")) {
                 //popup.show(ps);
@@ -94,14 +74,14 @@ public class Main extends Application {
             } 
         });
 
-        pane.setOnMouseClicked(e -> {
+        /*pane.setOnMouseClicked(e -> {
             clickCount++;
             //System.out.println(clickCount);
             if (clickCount % 4 == 2 || clickCount % 4 == 3) {
                 // System.out.println("Ok boomer");
                 wang.drop(HEIGHT);
             }
-        });
+        }); */
    
         ps.initStyle(StageStyle.TRANSPARENT);
         ps.setAlwaysOnTop(true);

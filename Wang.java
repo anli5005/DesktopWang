@@ -12,6 +12,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Arc;
+
+import java.io.File;
 import java.lang.Thread;
 
 public class Wang extends Pane {
@@ -23,7 +25,7 @@ public class Wang extends Pane {
 
 
     public Wang(double wid, double hig){
-        ImageView imgV = new ImageView(new Image("theStash/wang.png"));
+        ImageView imgV = new ImageView(new Image("wang.png"));
         imgV.setFitWidth(wid);
         imgV.setFitHeight(hig);
         Line body = new Line(), armL = new Line(), armR = new Line(), legL = new Line(), legR = new Line();
@@ -81,11 +83,40 @@ public class Wang extends Pane {
 
     public void wander() {
         Random rand = new Random();
-        
-        int randX = rand.nextInt((int) WIDTH);
-        int randY = rand.nextInt((int) HEIGHT);
-        
-        Line line = new Line(x,y,randX,randY);
+        int randX;
+        int randY;
+        int randChoice = rand.nextInt(10);
+        System.out.println(randChoice);
+
+        if (randChoice < 2) {
+            if (randChoice == 0) {
+                randX = 0;
+                randY = rand.nextInt((int) HEIGHT);
+
+            } else {
+                randX = (int) WIDTH;
+                randY = rand.nextInt((int) HEIGHT);
+            }
+            new Images(WIDTH,HEIGHT);
+        }
+
+        else if (randChoice == 3) {
+            randX = rand.nextInt((int) WIDTH);
+            randY = 0;
+            new Videos();
+        }
+
+        else if (randChoice == 4) {
+            randX = rand.nextInt((int) WIDTH);
+            randY = (int) HEIGHT;
+            sound();
+        }
+
+        else {
+            randX = rand.nextInt((int) WIDTH);
+            randY = rand.nextInt((int) HEIGHT);
+        }
+        Line line = new Line(getX(),getY(),randX,randY);
         PathTransition pt = new PathTransition();
         pt.setDuration(Duration.millis(3000));
         pt.setPath(line);
@@ -93,22 +124,21 @@ public class Wang extends Pane {
         pt.setCycleCount(1);
         pt.play();
 
-        x = line.getEndX();
-        y = line.getEndY();
+        /*if (randChoice < 2) 
+            new Images(WIDTH,HEIGHT);
+        else if (randChoice == 3)
+            new Videos();
+        else if (randChoice == 4)
+            sound();
+*/
+        setX(line.getEndX());
+        setY(line.getEndY());
         
-        pt.setOnFinished(e -> {
-            shleep();
-            activate();
-        });
+        pt.setOnFinished(e -> wander());
+
     }
-    public void shleep(){
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException ie) {
-            Thread.currentThread().interrupt();
-        }
-    }
-    public void activate() {
+    
+    /*public void activate() {
         Random rand = new Random();
         int selection = rand.nextInt(20);
         if(selection < 5){
@@ -116,19 +146,17 @@ public class Wang extends Pane {
         } 
         else if (selection == 12){
             sound();
-            shleep();
             activate();
         } else if(selection == 13){
             new Videos();
-            shleep();
             activate();
         } else {
             System.out.println(selection);
-            shleep();
             activate();
         }
     }
-    
+    */
+
     public int animate(int z) {
 
         Line line = new Line(x,y,x,y);
@@ -184,7 +212,7 @@ public class Wang extends Pane {
 
     }
 
-    public void drop(double HEIGHT){
+    /*public void drop(double HEIGHT){
         //System.out.println("You're finally awake");
         Line legR = (Line) wang.getChildren().get(4);
         //System.out.println("Leg:" + y);
@@ -192,7 +220,7 @@ public class Wang extends Pane {
             //System.out.println("gello");
             animate(2);
         }
-    }
+    }*/
 
     public void walk(double speed) {
         Arc arc = new Arc(0, 0, 10, 16, 250, 60);
@@ -235,10 +263,11 @@ public class Wang extends Pane {
 
     public void sound() {
         Random rand = new Random();
+        int upperBound = new File("asmr").listFiles().length;
 
-        AudioClip sound = new AudioClip(this.getClass().getResource("asmr/" + (rand.nextInt(3) + 1) + ".m4a").toString());
+        AudioClip sound = new AudioClip(this.getClass().getResource("asmr/" + (rand.nextInt(upperBound) + 1) + ".m4a").toString());
         sound.play();
-        activate();
+        //activate();
     }
 
     public void start(double width, double height) {
