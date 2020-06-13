@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 
 class Videos {
 
-    Videos() {
+    Videos(double x, double y) {
         Random rand = new Random();
         int upperBound = new File("vids").listFiles().length;
 
@@ -27,8 +27,12 @@ class Videos {
         Group root = new Group();  
         root.getChildren().add(mv);
 
+        subStage.setX(rand.nextInt((int) (x)));
+        subStage.setX(rand.nextInt((int) (y)));
+
         Scene scene = new Scene(root,600,360);  
         subStage.setScene(scene);  
+        subStage.setAlwaysOnTop(true);
         subStage.setTitle("Im sorry if this is a Rick Roll");  
         subStage.show();  
     }  
