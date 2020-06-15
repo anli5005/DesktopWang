@@ -39,7 +39,7 @@ public class Main extends Application {
         wang.start(WIDTH,HEIGHT);
         pane.getChildren().add(wang);
 
-        wang.start(WIDTH, HEIGHT);
+        wang.wander();
 
         wang.walk(700);
         // wang.activate();

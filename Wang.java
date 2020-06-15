@@ -92,7 +92,7 @@ public class Wang extends Pane {
         int randX;
         int randY;
         int randChoice = rand.nextInt(10);
-        System.out.println(randChoice);
+        //System.out.println(randChoice);
 
         if (randChoice < 2) {
             if (randChoice == 0) {
@@ -331,9 +331,9 @@ public class Wang extends Pane {
         Wang wang1 = new Wang(x,y);
         Wang wang2 = new Wang(x,y);
         
-        getChildren().add(wang1);
+        wang.getChildren().add(wang1);
+        wang.getChildren().add(wang2);
         
-        getChildren().add(wang2);
         
     }
     
