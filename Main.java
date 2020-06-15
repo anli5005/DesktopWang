@@ -65,6 +65,10 @@ public class Main extends Application {
                 if (wang.animate(4) == 2) {
                     new Images(WIDTH,HEIGHT);
                 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> da0f38e6b02376970c1e2be145c12d48a3c1c5bd
             } */if (e.getText().equals("1")) {
                 wang.sound();
             } if (e.getText().equals("2")) {

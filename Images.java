@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.Random;
 
 import javafx.scene.Scene;
@@ -10,14 +11,15 @@ class Images {
 
     Images(double x,double y) {
         Random rand = new Random();
-        
+        int upperBound = new File("theStash").listFiles().length;
+
         Stage subStage = new Stage();
         subStage.setTitle("New Stage");
         
 
         Pane root = new Pane();
         
-        Image img = new Image("theStash/" + (rand.nextInt(7) + 1) + ".png");
+        Image img = new Image("theStash/" + (rand.nextInt(upperBound) + 1) + ".png");
         double wid = img.getWidth();
         double hig = img.getHeight();
 
