@@ -25,9 +25,11 @@ import java.lang.Thread;
 public class Wang extends Pane {
 
     private Group wang = new Group();
-    private final double dx = 150, dy = 65;
     private double x, y;
+    private boolean shadowClone = false;
+    private Wang wang1, wang2;
     private double WIDTH,HEIGHT;
+    
 
 
     public Wang(double wid, double hig){
@@ -91,7 +93,7 @@ public class Wang extends Pane {
         Random rand = new Random();
         int randX;
         int randY;
-        int randChoice = rand.nextInt(10);
+        int randChoice = rand.nextInt(15);
         //System.out.println(randChoice);
 
         if (randChoice < 2) {
@@ -118,10 +120,29 @@ public class Wang extends Pane {
             sound();
         }
 
+        else if (randChoice == 5) {
+
+            randX = rand.nextInt((int) WIDTH);
+            randY = rand.nextInt((int) HEIGHT);
+            if (!shadowClone)
+                shadowClone(WIDTH / 2.75 / 620 * 100, HEIGHT / 781 * 100);
+            
+        } 
+
+        else if (randChoice == 6 || randChoice == 7) {
+            randX = rand.nextInt((int) WIDTH);
+            randY = rand.nextInt((int) HEIGHT);
+
+            if (shadowClone) 
+                removeShadowClone();
+            
+        }
+
         else {
             randX = rand.nextInt((int) WIDTH);
             randY = rand.nextInt((int) HEIGHT);
         }
+        
         Line line = new Line(getX(),getY(),randX,randY);
         PathTransition pt = new PathTransition();
         pt.setDuration(Duration.millis(3000));
@@ -130,13 +151,9 @@ public class Wang extends Pane {
         pt.setCycleCount(1);
         pt.play();
 
-        /*if (randChoice < 2) 
-            new Images(WIDTH,HEIGHT);
-        else if (randChoice == 3)
-            new Videos();
-        else if (randChoice == 4)
-            sound();
-*/
+        if (shadowClone)
+            shadowCloneMove(wang1, wang2, randX, randY);
+
         setX(line.getEndX());
         setY(line.getEndY());
         
@@ -146,66 +163,6 @@ public class Wang extends Pane {
 
     }
     
-    /*public void activate() {
-        Random rand = new Random();
-        int selection = rand.nextInt(20);
-        if(selection < 5){
-            wander();
-        } 
-        else if (selection == 12){
-            sound();
-            activate();
-        } else if(selection == 13){
-            new Videos();
-            activate();
-        } else {
-            System.out.println(selection);
-            activate();
-        }
-    }
-    */
-
-    public int animate(int z) {
-
-        Line line = new Line(x,y,x,y);
-        line.setStroke(Color.CYAN);
-
-        if (z == 1)
-            line.setEndY(y-dy);
-        else if (z == 2) 
-            line.setEndY(y+dy);
-        else if (z == 3) 
-            line.setEndX(x-dx);
-        else if (z == 4) 
-            line.setEndX(x+dx);
-
-        if (line.getEndX() > WIDTH) { 
-            line.setEndX(WIDTH/2);
-            return 2;
-        } else if (line.getEndX() < 0) {
-            line.setEndX(WIDTH/2);
-            return 1;
-        } else if (line.getEndY() > HEIGHT) {
-            line.setEndY(HEIGHT/2);
-        } else if (line.getEndY() < 0) {
-            line.setEndY(HEIGHT/2);
-            return 3;
-        }
-        
-        PathTransition pt = new PathTransition();
-        pt.setDuration(Duration.millis(500));
-        pt.setPath(line);
-        pt.setNode(wang);
-        pt.setCycleCount(1);
-        pt.play();
-
-        x = line.getEndX();
-        y = line.getEndY();
-
-        
-        return -1;
-    }
-
     public void follow(double x, double y) {
         Line line = new Line(this.x, this.y, x, y);
         line.setStroke(Color.CYAN);
@@ -288,8 +245,6 @@ public class Wang extends Pane {
         walking2.play();
     }
 
-
-
     public void sound() {
         Random rand = new Random();
         int upperBound = new File("asmr").listFiles().length;
@@ -328,13 +283,39 @@ public class Wang extends Pane {
     }
 
     public void shadowClone(double x, double y) {
-        Wang wang1 = new Wang(x,y);
-        Wang wang2 = new Wang(x,y);
+        wang1 = new Wang(x,y);
+        wang2 = new Wang(x,y);
         
-        wang.getChildren().add(wang1);
-        wang.getChildren().add(wang2);
-        
-        
+        wang1.walk(700);
+        wang2.walk(700);
+
+        getChildren().add(wang1);
+        getChildren().add(wang2);
+
+        shadowClone = true;
     }
-    
+
+    public void shadowCloneMove(Wang wang1, Wang wang2, double randX, double randY) {
+        Line line1 = new Line(getX() + 100 , getY(), randX + 100, randY);
+        PathTransition pt1 = new PathTransition();
+        pt1.setDuration(Duration.millis(3000));
+        pt1.setPath(line1);
+        pt1.setNode(wang1);
+        pt1.setCycleCount(1);
+        pt1.play();
+
+        Line line2 = new Line(getX() - 100, getY(), randX - 100, randY);
+        PathTransition pt2 = new PathTransition();
+        pt2.setDuration(Duration.millis(3000));
+        pt2.setPath(line2);
+        pt2.setNode(wang2);
+        pt2.setCycleCount(1);
+        pt2.play();
+    }
+
+    public void removeShadowClone() {
+        shadowClone = false;
+        getChildren().remove(wang1);
+        getChildren().remove(wang2);
+    }
 }

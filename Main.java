@@ -19,14 +19,8 @@ public class Main extends Application {
     @Override
     public void start(Stage ps) {
 
-        // showInformationDialog();
         Pane pane = new Pane();
-
-        /*
-         * Label label = new Label("path2fx"); Popup popup = new Popup();
-         * popup.getContent().add(label);
-         */
-
+        
         Rectangle2D screenBounds = Screen.getPrimary().getBounds();
         final double WIDTH = screenBounds.getWidth();
         final double HEIGHT = screenBounds.getHeight();
@@ -34,17 +28,16 @@ public class Main extends Application {
         final double hig = HEIGHT / 781 * 100;
 
         Wang wang = new Wang(wid, hig);
-        // StateCapitalQuiz SCQ = new StateCapitalQuiz();
-        // bPane.setTop(SCQ);
+        
         wang.start(WIDTH,HEIGHT);
         pane.getChildren().add(wang);
 
         wang.wander();
 
         wang.walk(700);
-        // wang.activate();
         //wang.wander();
 
+        
         pane.setOnMouseDragged(e -> {
 
             wang.follow(e.getX(), e.getY());
@@ -80,13 +73,13 @@ public class Main extends Application {
             }if (e.getText().equals("1")) {
                 wang.sound();
             } if (e.getText().equals("2")) {
-                //popup.show(ps);
+                //
             } if (e.getText().equals("3")) {
                 wang.shadowClone(wid,hig);
+                
             }
             
         });
-
 
         /*pane.setOnMouseClicked(e -> {
             clickCount++;
@@ -99,8 +92,6 @@ public class Main extends Application {
    
         ps.initStyle(StageStyle.TRANSPARENT);
         ps.setAlwaysOnTop(true);
-        //if (!ps.isAlwaysOnTop())
-            //ps.setAlwaysOnTop(true);
         Scene scene = new Scene(pane, WIDTH, HEIGHT);
         scene.setFill(Color.TRANSPARENT);
         ps.setTitle("DesktopWang");
