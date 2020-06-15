@@ -10,14 +10,29 @@ body {
   background-color: #3e567d;
   color: #a8c9ff;
   text-align: center;
-  padding-left: 5%;
-  padding-right: 5%;
+  padding-left: 10%;
+  padding-right: 10%;
+  font-family: "Comic Sans MS", cursive, sans-serif;
 }
 .contac {
   width: 33.33%;
   float: center;
- 
+  margin-right: 50px;
+  margin-left: 50px;
   text-shadow: 10px black;
+}
+h1{
+  font-size: 70px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+h3{
+  margin-top: 0px;
+}
+
+h2{
+  text-shadow: 2px 2px 4px #000;
 }
 
 .btn:hover {
@@ -40,9 +55,10 @@ body {
 .top{
   text-align: center;
   margin-bottom: 20px;
+  text-shadow: 2px 2px 4px #000;
 }
 
 .download{
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 70px;
 }
