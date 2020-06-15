@@ -12,7 +12,6 @@ class Images {
     Images(double x,double y) {
         Random rand = new Random();
         int upperBound = new File("theStash").listFiles().length;
-
         Stage subStage = new Stage();
         subStage.setTitle("The Stash");
         
@@ -44,7 +43,7 @@ class Images {
         subStage.setX(rand.nextInt((int) (y)));
 
         Scene scene = new Scene(root);
-        subStage.setAlwaysOnTop(true);
+        //subStage.setAlwaysOnTop(true);
         subStage.setScene(scene);
         subStage.show();
     }

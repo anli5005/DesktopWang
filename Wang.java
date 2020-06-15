@@ -326,5 +326,15 @@ public class Wang extends Pane {
         WIDTH = width;
         HEIGHT = height;
     }
+
+    public void shadowClone(double x, double y) {
+        Wang wang1 = new Wang(x,y);
+        Wang wang2 = new Wang(x,y);
+        
+        getChildren().add(wang1);
+        
+        getChildren().add(wang2);
+        
+    }
     
 }

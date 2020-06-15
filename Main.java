@@ -4,15 +4,12 @@ import java.security.Key;
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import sun.awt.WindowClosingListener;
+//import sun.awt.WindowClosingListener;
 import javafx.stage.Screen;
 
 public class Main extends Application {
@@ -39,14 +36,14 @@ public class Main extends Application {
         Wang wang = new Wang(wid, hig);
         // StateCapitalQuiz SCQ = new StateCapitalQuiz();
         // bPane.setTop(SCQ);
-
+        wang.start(WIDTH,HEIGHT);
         pane.getChildren().add(wang);
 
         wang.start(WIDTH, HEIGHT);
 
         wang.walk(700);
         // wang.activate();
-        wang.wander();
+        //wang.wander();
 
         pane.setOnMouseDragged(e -> {
 
@@ -77,8 +74,7 @@ public class Main extends Application {
             } else if (e.getCode() == KeyCode.RIGHT) {
                 if (wang.animate(4) == 2) {
                     new Images(WIDTH,HEIGHT);
-                }
-            } */
+3            } */
             if ((e.getCode() == KeyCode.E) || (e.getCode() == KeyCode.ESCAPE)) {
                 System.exit(0);
             }if (e.getText().equals("1")) {
@@ -86,7 +82,7 @@ public class Main extends Application {
             } if (e.getText().equals("2")) {
                 //popup.show(ps);
             } if (e.getText().equals("3")) {
-                wang.wander();
+                wang.shadowClone(wid,hig);
             }
             
         });
@@ -103,6 +99,8 @@ public class Main extends Application {
    
         ps.initStyle(StageStyle.TRANSPARENT);
         ps.setAlwaysOnTop(true);
+        //if (!ps.isAlwaysOnTop())
+            //ps.setAlwaysOnTop(true);
         Scene scene = new Scene(pane, WIDTH, HEIGHT);
         scene.setFill(Color.TRANSPARENT);
         ps.setTitle("DesktopWang");

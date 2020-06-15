@@ -32,7 +32,7 @@ class Videos {
 
         Scene scene = new Scene(root,600,360);  
         subStage.setScene(scene);  
-        subStage.setAlwaysOnTop(true);
+        //subStage.setAlwaysOnTop(true);
         subStage.setTitle("Im sorry if this is a Rick Roll");  
         subStage.show();  
     }  
