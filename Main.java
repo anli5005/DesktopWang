@@ -1,3 +1,6 @@
+import java.awt.AWTException;
+import java.security.Key;
+
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
@@ -9,6 +12,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import sun.awt.WindowClosingListener;
 import javafx.stage.Screen;
 
 public class Main extends Application {
@@ -21,10 +25,10 @@ public class Main extends Application {
         // showInformationDialog();
         Pane pane = new Pane();
 
-        /*Label label = new Label("path2fx");
-        Popup popup = new Popup();
-        popup.getContent().add(label);
-        */
+        /*
+         * Label label = new Label("path2fx"); Popup popup = new Popup();
+         * popup.getContent().add(label);
+         */
 
         Rectangle2D screenBounds = Screen.getPrimary().getBounds();
         final double WIDTH = screenBounds.getWidth();
@@ -41,13 +45,22 @@ public class Main extends Application {
         wang.start(WIDTH, HEIGHT);
 
         wang.walk(700);
-        //wang.activate();
+        // wang.activate();
         wang.wander();
 
         pane.setOnMouseDragged(e -> {
 
             wang.follow(e.getX(), e.getY());
 
+        });
+
+        pane.setOnMouseMoved(e -> {
+            try {
+                wang.captureMouse(e.getX(), e.getY());
+            } catch (AWTException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
         });
 
         pane.setOnKeyPressed(e -> {
@@ -65,18 +78,19 @@ public class Main extends Application {
                 if (wang.animate(4) == 2) {
                     new Images(WIDTH,HEIGHT);
                 }
-<<<<<<< HEAD
-=======
-
->>>>>>> da0f38e6b02376970c1e2be145c12d48a3c1c5bd
-            } */if (e.getText().equals("1")) {
+            } */
+            if ((e.getCode() == KeyCode.E) || (e.getCode() == KeyCode.ESCAPE)) {
+                System.exit(0);
+            }if (e.getText().equals("1")) {
                 wang.sound();
             } if (e.getText().equals("2")) {
                 //popup.show(ps);
             } if (e.getText().equals("3")) {
                 wang.wander();
-            } 
+            }
+            
         });
+
 
         /*pane.setOnMouseClicked(e -> {
             clickCount++;

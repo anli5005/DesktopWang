@@ -1,14 +1,20 @@
 import javafx.util.Duration;
 import java.util.Random;
 
+import javax.sound.sampled.SourceDataLine;
+
+import java.awt.*;
+
 import javafx.animation.PathTransition;
 import javafx.animation.SequentialTransition;
 import javafx.animation.Timeline;
 import javafx.scene.Group;
+import javafx.scene.effect.Light.Point;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.AudioClip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Arc;
@@ -210,6 +216,27 @@ public class Wang extends Pane {
         this.x = x;
         this.y = y;
 
+    }
+
+    public void captureMouse(double x, double y) throws AWTException {
+        Robot robot = new Robot();
+        robot.mouseMove(300, 300);
+         java.awt.Point p = MouseInfo.getPointerInfo().getLocation();
+         double mouseX = p.getX();
+         double mouseY = p.getY();
+         System.out.println ("(" + mouseX + "," + mouseY + ")");
+         System.out.println ("(" + this.x + "," + this.y + ")\n");
+
+         /*if (((int) mouseX == (int) x) && ((int) mouseY == (int) y)) {
+            System.out.println("CAPTURED");
+             for (int i=0; i<1000; i++) {
+                 
+                 mouseX = this.x;
+                 mouseY = this.y;
+             }
+         }*/
+
+          
     }
 
     /*public void drop(double HEIGHT){
