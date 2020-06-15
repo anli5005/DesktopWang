@@ -109,7 +109,7 @@ public class Wang extends Pane {
         else if (randChoice == 3) {
             randX = rand.nextInt((int) WIDTH);
             randY = 0;
-            new Videos();
+            new Videos(WIDTH,HEIGHT);
         }
 
         else if (randChoice == 4) {
@@ -140,6 +140,8 @@ public class Wang extends Pane {
         setX(line.getEndX());
         setY(line.getEndY());
         
+        wang.toFront();
+
         pt.setOnFinished(e -> wander());
 
     }
