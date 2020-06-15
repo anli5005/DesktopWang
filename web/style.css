@@ -1,22 +1,40 @@
+.btn {
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  padding: 12px 30px;
+  cursor: pointer;
+  font-size: 20px;
+}
 body {
+  background-color: #3e567d;
+  color: #a8c9ff;
   text-align: center;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+.contac {
+  width: 33.33%;
+  float: center;
+ 
+  text-shadow: 10px black;
 }
 
-.btn {
-    background-color: DodgerBlue;
-    border: none;
-    color: white;
-    padding: 12px 30px;
-    cursor: pointer;
-    font-size: 20px;
-  }
-
 .btn:hover {
-    background-color: RoyalBlue;
+  background-color: RoyalBlue;
 }
 
 .contact{
   display:inline-flex;
+  margin-bottom: 10%;
+}
+
+.info{
+  margin-bottom: 4%;
+}
+
+.pfp{
+  border: 10px solid #446cad;
 }
 
 .top{
