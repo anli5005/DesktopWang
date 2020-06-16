@@ -68,7 +68,7 @@ public class Main extends Application {
             } else if (e.getCode() == KeyCode.RIGHT) {
                 if (wang.animate(4) == 2) {
                     new Images(WIDTH,HEIGHT);
-3            } */
+3            } 
             if ((e.getCode() == KeyCode.E) || (e.getCode() == KeyCode.ESCAPE)) {
                 System.exit(0);
             }if (e.getText().equals("1")) {
@@ -78,7 +78,7 @@ public class Main extends Application {
             } if (e.getText().equals("3")) {
                 wang.shadowClone(wid,hig);
                 
-            }
+            }*/
             
         });
 

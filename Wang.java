@@ -94,7 +94,7 @@ public class Wang extends Pane {
         int randX;
         int randY;
         int randChoice = rand.nextInt(20);
-        //System.out.println(randChoice);
+        System.out.println(randChoice);
         if (randChoice != 10) {
             if (randChoice < 2) {
                 if (randChoice == 0) {
@@ -283,7 +283,7 @@ public class Wang extends Pane {
         WIDTH = width;
         HEIGHT = height;
 
-        seqT.setOnFinished(e -> wander());
+        //seqT.setOnFinished(e -> wander());
 
     }
 
