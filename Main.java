@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 //import sun.awt.WindowClosingListener;
@@ -32,7 +33,7 @@ public class Main extends Application {
         wang.start(WIDTH,HEIGHT);
         pane.getChildren().add(wang);
 
-        wang.wander();
+        //wang.wander();
 
         wang.walk(700);
         //wang.wander();
@@ -73,7 +74,7 @@ public class Main extends Application {
             }if (e.getText().equals("1")) {
                 wang.sound();
             } if (e.getText().equals("2")) {
-                //
+                wang.avatar();
             } if (e.getText().equals("3")) {
                 wang.shadowClone(wid,hig);
                 

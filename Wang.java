@@ -93,74 +93,77 @@ public class Wang extends Pane {
         Random rand = new Random();
         int randX;
         int randY;
-        int randChoice = rand.nextInt(15);
+        int randChoice = rand.nextInt(20);
         //System.out.println(randChoice);
+        if (randChoice != 10) {
+            if (randChoice < 2) {
+                if (randChoice == 0) {
+                    randX = 0;
+                    randY = rand.nextInt((int) HEIGHT);
 
-        if (randChoice < 2) {
-            if (randChoice == 0) {
-                randX = 0;
+                } else {
+                    randX = (int) WIDTH;
+                    randY = rand.nextInt((int) HEIGHT);
+                }
+                new Images(WIDTH,HEIGHT);
+            }
+
+            else if (randChoice == 3) {
+                randX = rand.nextInt((int) WIDTH);
+                randY = 0;
+                new Videos(WIDTH,HEIGHT);
+            }
+
+            else if (randChoice == 4) {
+                randX = rand.nextInt((int) WIDTH);
+                randY = (int) HEIGHT;
+                sound();
+            }
+
+            else if (randChoice == 5) {
+
+                randX = rand.nextInt((int) WIDTH);
+                randY = rand.nextInt((int) HEIGHT);
+                if (!shadowClone)
+                    shadowClone(WIDTH / 2.75 / 620 * 100, HEIGHT / 781 * 100);
+                
+            } 
+
+            else if (randChoice == 6 || randChoice == 7) {
+                randX = rand.nextInt((int) WIDTH);
                 randY = rand.nextInt((int) HEIGHT);
 
-            } else {
-                randX = (int) WIDTH;
+                if (shadowClone) 
+                    removeShadowClone();
+                
+            }
+
+            else {
+                randX = rand.nextInt((int) WIDTH);
                 randY = rand.nextInt((int) HEIGHT);
             }
-            new Images(WIDTH,HEIGHT);
-        }
-
-        else if (randChoice == 3) {
-            randX = rand.nextInt((int) WIDTH);
-            randY = 0;
-            new Videos(WIDTH,HEIGHT);
-        }
-
-        else if (randChoice == 4) {
-            randX = rand.nextInt((int) WIDTH);
-            randY = (int) HEIGHT;
-            sound();
-        }
-
-        else if (randChoice == 5) {
-
-            randX = rand.nextInt((int) WIDTH);
-            randY = rand.nextInt((int) HEIGHT);
-            if (!shadowClone)
-                shadowClone(WIDTH / 2.75 / 620 * 100, HEIGHT / 781 * 100);
             
+            Line line = new Line(getX(),getY(),randX,randY);
+            PathTransition pt = new PathTransition();
+            pt.setDuration(Duration.millis(3000));
+            pt.setPath(line);
+            pt.setNode(wang);
+            pt.setCycleCount(1);
+            pt.play();
+
+            if (shadowClone)
+                shadowCloneMove(wang1, wang2, randX, randY);
+
+            setX(line.getEndX());
+            setY(line.getEndY());
+            
+            wang.toFront();
+
+            pt.setOnFinished(e -> wander());
         } 
 
-        else if (randChoice == 6 || randChoice == 7) {
-            randX = rand.nextInt((int) WIDTH);
-            randY = rand.nextInt((int) HEIGHT);
-
-            if (shadowClone) 
-                removeShadowClone();
-            
-        }
-
-        else {
-            randX = rand.nextInt((int) WIDTH);
-            randY = rand.nextInt((int) HEIGHT);
-        }
-        
-        Line line = new Line(getX(),getY(),randX,randY);
-        PathTransition pt = new PathTransition();
-        pt.setDuration(Duration.millis(3000));
-        pt.setPath(line);
-        pt.setNode(wang);
-        pt.setCycleCount(1);
-        pt.play();
-
-        if (shadowClone)
-            shadowCloneMove(wang1, wang2, randX, randY);
-
-        setX(line.getEndX());
-        setY(line.getEndY());
-        
-        wang.toFront();
-
-        pt.setOnFinished(e -> wander());
-
+        else 
+            avatar();
     }
     
     public void follow(double x, double y) {
@@ -263,7 +266,6 @@ public class Wang extends Pane {
         pt.setNode(wang);
         pt.setAutoReverse(true);
         pt.setCycleCount(1);
-        pt.play();
         
         Line line2 = new Line(width/2, height, width/2, height / 2);
         PathTransition pt2 = new PathTransition();
@@ -280,6 +282,9 @@ public class Wang extends Pane {
 
         WIDTH = width;
         HEIGHT = height;
+
+        seqT.setOnFinished(e -> wander());
+
     }
 
     public void shadowClone(double x, double y) {
@@ -317,5 +322,40 @@ public class Wang extends Pane {
         shadowClone = false;
         getChildren().remove(wang1);
         getChildren().remove(wang2);
+    }
+
+    public void avatar() {
+        Random rand = new Random();
+        int upperBound = new File("avatar").listFiles().length;
+        Image img = new Image("avatar/" + (rand.nextInt(upperBound) + 1) + ".png");
+        ImageView ryann = new ImageView(img);
+        ryann.setFitHeight(200);
+        ryann.setFitWidth(200);     
+        
+        getChildren().add(ryann);
+            
+        Line path;
+        
+        if (Math.abs(x - WIDTH) < WIDTH / 2) {
+            path = new Line(x,y,WIDTH,y);          
+        }
+
+        else {
+            path = new Line(x,y,0,y);
+        }
+
+        PathTransition ryry = new PathTransition();
+        ryry.setPath(path);
+        ryry.setNode(ryann);
+        ryry.setDuration(Duration.millis(2000));
+        ryry.setCycleCount(1);
+        ryry.play();
+
+        ryry.setOnFinished(e -> {
+            getChildren().remove(ryann);
+            wander();
+        });
+        
+           
     }
 }
