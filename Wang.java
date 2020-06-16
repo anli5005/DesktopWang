@@ -5,6 +5,7 @@ import javax.sound.sampled.SourceDataLine;
 
 import java.awt.*;
 
+import javafx.animation.FadeTransition;
 import javafx.animation.PathTransition;
 import javafx.animation.SequentialTransition;
 import javafx.animation.Timeline;
@@ -25,6 +26,7 @@ import java.lang.Thread;
 public class Wang extends Pane {
 
     private Group wang = new Group();
+    private double limX, limY;
     private double x, y;
     private boolean shadowClone = false;
     private Wang wang1, wang2;
@@ -32,8 +34,12 @@ public class Wang extends Pane {
     
 
 
-    public Wang(double wid, double hig){
-        ImageView imgV = new ImageView(new Image("wang.png"));
+    public Wang(double wid, double hig) {
+
+        Image img = new Image("wang.png");
+        limX = img.getWidth();
+        limY = img.getHeight();
+        ImageView imgV = new ImageView(img);
         imgV.setFitWidth(wid);
         imgV.setFitHeight(hig);
         Line body = new Line(), armL = new Line(), armR = new Line(), legL = new Line(), legR = new Line();
@@ -95,7 +101,7 @@ public class Wang extends Pane {
         int randY;
         int randChoice = rand.nextInt(20);
         System.out.println(randChoice);
-        if (randChoice != 10) {
+        if (randChoice != 10 && randChoice != 5 && randChoice != 6 && randChoice != 7) {
             if (randChoice < 2) {
                 if (randChoice == 0) {
                     randX = 0;
@@ -120,29 +126,23 @@ public class Wang extends Pane {
                 sound();
             }
 
-            else if (randChoice == 5) {
-
-                randX = rand.nextInt((int) WIDTH);
-                randY = rand.nextInt((int) HEIGHT);
-                if (!shadowClone)
-                    shadowClone(WIDTH / 2.75 / 620 * 100, HEIGHT / 781 * 100);
-                
-            } 
-
-            else if (randChoice == 6 || randChoice == 7) {
-                randX = rand.nextInt((int) WIDTH);
-                randY = rand.nextInt((int) HEIGHT);
-
-                if (shadowClone) 
-                    removeShadowClone();
-                
-            }
-
             else {
                 randX = rand.nextInt((int) WIDTH);
                 randY = rand.nextInt((int) HEIGHT);
             }
             
+            if (randX > WIDTH - limX)
+                randX = (int) (WIDTH - limX);
+
+            else if (randX < limX) 
+                randX = (int) limX;
+            
+            else if (randY > HEIGHT - limY)
+                randY = (int) (HEIGHT - limY);
+
+            else if (randY < limY)
+                randY = (int) limY;
+                
             Line line = new Line(getX(),getY(),randX,randY);
             PathTransition pt = new PathTransition();
             pt.setDuration(Duration.millis(3000));
@@ -162,8 +162,24 @@ public class Wang extends Pane {
             pt.setOnFinished(e -> wander());
         } 
 
-        else 
+        else if (randChoice == 5) {
+
+            if (!shadowClone)
+                shadowClone(WIDTH / 2.75 / 620 * 100, HEIGHT / 781 * 100);
+        }
+
+        else if (randChoice == 6 || randChoice == 7) {
+            
+            if (shadowClone) 
+                removeShadowClone();
+            else 
+                wander();
+        }
+
+        else if (randChoice == 10) 
             avatar();
+        
+
     }
     
     public void follow(double x, double y) {
@@ -283,7 +299,7 @@ public class Wang extends Pane {
         WIDTH = width;
         HEIGHT = height;
 
-        //seqT.setOnFinished(e -> wander());
+        seqT.setOnFinished(e -> wander());
 
     }
 
@@ -298,6 +314,39 @@ public class Wang extends Pane {
         getChildren().add(wang2);
 
         shadowClone = true;
+
+        Line l1 = new Line(getX(), getY(), getX() + 100, getY());
+        Line l2 = new Line(getX(), getY(), getX() - 100, getY());
+        
+        PathTransition p1 = new PathTransition();
+        p1.setDuration(Duration.millis(1500));
+        p1.setPath(l1);
+        p1.setNode(wang1);
+        p1.setCycleCount(1);
+        p1.play();
+
+        FadeTransition f1 = new FadeTransition(Duration.millis(1500),wang1);
+        f1.setFromValue(0);
+        f1.setToValue(1);
+        f1.setCycleCount(1);
+        f1.play();
+
+        PathTransition p2 = new PathTransition();
+        p2.setDuration(Duration.millis(1500));
+        p2.setPath(l2);
+        p2.setNode(wang2);
+        p2.setCycleCount(1);
+        p2.play();
+
+        FadeTransition f2 = new FadeTransition(Duration.millis(1500),wang2);
+        f2.setFromValue(0);
+        f2.setToValue(1);
+        f2.setCycleCount(1);
+        f2.play();
+
+        f2.setOnFinished(e -> {
+            wander();
+        });
     }
 
     public void shadowCloneMove(Wang wang1, Wang wang2, double randX, double randY) {
@@ -319,9 +368,43 @@ public class Wang extends Pane {
     }
 
     public void removeShadowClone() {
+        Line l1 = new Line(getX() + 100, getY(), getX(), getY());
+        Line l2 = new Line(getX() - 100, getY(), getX(), getY());
+        
+        PathTransition p1 = new PathTransition();
+        p1.setDuration(Duration.millis(1500));
+        p1.setPath(l1);
+        p1.setNode(wang1);
+        p1.setCycleCount(1);
+        p1.play();
+
+        FadeTransition f1 = new FadeTransition(Duration.millis(1500),wang1);
+        f1.setFromValue(1);
+        f1.setToValue(0);
+        f1.setCycleCount(1);
+        f1.play();
+
+        PathTransition p2 = new PathTransition();
+        p2.setDuration(Duration.millis(1500));
+        p2.setPath(l2);
+        p2.setNode(wang2);
+        p2.setCycleCount(1);
+        p2.play();
+
+        FadeTransition f2 = new FadeTransition(Duration.millis(1500),wang2);
+        f2.setFromValue(1);
+        f2.setToValue(0);
+        f2.setCycleCount(1);
+        f2.play();
+        
+        f2.setOnFinished(e -> {
+            getChildren().remove(wang1);
+            getChildren().remove(wang2);
+            wander();
+
+        });
+
         shadowClone = false;
-        getChildren().remove(wang1);
-        getChildren().remove(wang2);
     }
 
     public void avatar() {
