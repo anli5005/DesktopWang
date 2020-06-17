@@ -24,6 +24,7 @@ class Images {
         double hig = img.getHeight();
 
         ImageView imgV = new ImageView(img);
+        
 
         if (wid < 1000) {
             imgV.setFitHeight(hig/1.5);
