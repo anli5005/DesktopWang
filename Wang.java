@@ -104,35 +104,24 @@ public class Wang extends Pane {
         //System.out.println(randChoice);
         if (randChoice != 10 && randChoice != 5 && randChoice != 6 && randChoice != 7) {
             if (randChoice < 2) {
-                if (randChoice == 0) {
-                    randX = 0;
-                    randY = rand.nextInt((int) HEIGHT);
-
-                } else {
-                    randX = (int) WIDTH;
-                    randY = rand.nextInt((int) HEIGHT);
-                }
+                
                 new Images(WIDTH,HEIGHT);
                 ps.toFront();
             }
 
             else if (randChoice == 3) {
-                randX = rand.nextInt((int) WIDTH);
-                randY = 0;
+                
                 new Videos(WIDTH,HEIGHT);
                 ps.toFront();
             }
 
-            else if (randChoice == 4) {
-                randX = rand.nextInt((int) WIDTH);
-                randY = (int) HEIGHT;
+            else if (randChoice == 4)  {
                 sound();
             }
+            
+            randX = rand.nextInt((int) WIDTH);
+            randY = rand.nextInt((int) HEIGHT);
 
-            else {
-                randX = rand.nextInt((int) WIDTH);
-                randY = rand.nextInt((int) HEIGHT);
-            }
             
             if (randX > WIDTH - limX)
                 randX = (int) (WIDTH - limX);
@@ -159,9 +148,7 @@ public class Wang extends Pane {
 
             setX(line.getEndX());
             setY(line.getEndY());
-            
-            wang.toFront();
-
+             
             pt.setOnFinished(e -> wander());
         } 
 
