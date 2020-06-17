@@ -222,23 +222,14 @@ public class Wang extends Pane {
 
     public void captureMouse(double x, double y) throws AWTException {
         Robot robot = new Robot();
-        robot.mouseMove(300, 300);
+        
          java.awt.Point p = MouseInfo.getPointerInfo().getLocation();
          double mouseX = p.getX();
          double mouseY = p.getY();
          System.out.println ("(" + mouseX + "," + mouseY + ")");
          System.out.println ("(" + this.x + "," + this.y + ")\n");
-
-         /*if (((int) mouseX == (int) x) && ((int) mouseY == (int) y)) {
-            System.out.println("CAPTURED");
-             for (int i=0; i<1000; i++) {
-                 
-                 mouseX = this.x;
-                 mouseY = this.y;
-             }
-         }*/
-
-          
+         System.out.println("CAPTURED");
+         robot.mouseMove(0, 0);
     }
 
     /*public void drop(double HEIGHT){
