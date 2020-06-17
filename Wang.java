@@ -1,8 +1,6 @@
 import javafx.util.Duration;
 import java.util.Random;
 
-import javax.sound.sampled.SourceDataLine;
-
 import java.awt.*;
 
 import javafx.animation.FadeTransition;
@@ -10,7 +8,6 @@ import javafx.animation.PathTransition;
 import javafx.animation.SequentialTransition;
 import javafx.animation.Timeline;
 import javafx.scene.Group;
-import javafx.scene.effect.Light.Point;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.AudioClip;
 import javafx.scene.image.Image;
@@ -21,7 +18,6 @@ import javafx.stage.Stage;
 import javafx.scene.shape.Arc;
 
 import java.io.File;
-import java.lang.Thread;
 
 public class Wang extends Pane {
 
@@ -405,8 +401,6 @@ public class Wang extends Pane {
         ryry.setOnFinished(e -> {
             getChildren().remove(ryann);
             wander();
-        });
-        
-           
+        });     
     }
 }
