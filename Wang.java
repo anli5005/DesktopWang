@@ -15,9 +15,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.media.AudioClip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.stage.Stage;
 import javafx.scene.shape.Arc;
 
 import java.io.File;
@@ -31,6 +31,7 @@ public class Wang extends Pane {
     private boolean shadowClone = false;
     private Wang wang1, wang2;
     private double WIDTH,HEIGHT;
+    private Stage ps;
     
 
 
@@ -100,7 +101,7 @@ public class Wang extends Pane {
         int randX;
         int randY;
         int randChoice = rand.nextInt(20);
-        System.out.println(randChoice);
+        //System.out.println(randChoice);
         if (randChoice != 10 && randChoice != 5 && randChoice != 6 && randChoice != 7) {
             if (randChoice < 2) {
                 if (randChoice == 0) {
@@ -112,12 +113,14 @@ public class Wang extends Pane {
                     randY = rand.nextInt((int) HEIGHT);
                 }
                 new Images(WIDTH,HEIGHT);
+                ps.toFront();
             }
 
             else if (randChoice == 3) {
                 randX = rand.nextInt((int) WIDTH);
                 randY = 0;
                 new Videos(WIDTH,HEIGHT);
+                ps.toFront();
             }
 
             else if (randChoice == 4) {
@@ -166,6 +169,10 @@ public class Wang extends Pane {
 
             if (!shadowClone)
                 shadowClone(WIDTH / 2.75 / 620 * 100, HEIGHT / 781 * 100);
+
+            else {
+                wander();
+            }
         }
 
         else if (randChoice == 6 || randChoice == 7) {
@@ -273,7 +280,7 @@ public class Wang extends Pane {
         //activate();
     }
 
-    public void start(double width, double height) {
+    public void start(double width, double height, Stage ps) {
         
         Line line = new Line(width/2, height + 50, width/2, height);
         PathTransition pt = new PathTransition();
@@ -298,9 +305,9 @@ public class Wang extends Pane {
 
         WIDTH = width;
         HEIGHT = height;
-
+        this.ps = ps;
         seqT.setOnFinished(e -> wander());
-
+    
     }
 
     public void shadowClone(double x, double y) {

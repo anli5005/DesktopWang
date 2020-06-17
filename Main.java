@@ -10,6 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.Modality;
 //import sun.awt.WindowClosingListener;
 import javafx.stage.Screen;
 
@@ -30,7 +31,7 @@ public class Main extends Application {
 
         Wang wang = new Wang(wid, hig);
         
-        wang.start(WIDTH,HEIGHT);
+        wang.start(WIDTH,HEIGHT, ps);
         pane.getChildren().add(wang);
 
         //wang.wander();
@@ -71,15 +72,11 @@ public class Main extends Application {
 3            } */
             if ((e.getCode() == KeyCode.E) || (e.getCode() == KeyCode.ESCAPE)) {
                 System.exit(0);
-            }if (e.getText().equals("1")) {
-                wang.sound();
-            } if (e.getText().equals("2")) {
-                wang.removeShadowClone();
-            } if (e.getText().equals("3")) {
-                wang.shadowClone(wid,hig);
-                
+            } if (e.getText().equals("1")) {
+                new Images(WIDTH,HEIGHT);
+                ps.toFront();
             }
-            
+
         });
 
         /*pane.setOnMouseClicked(e -> {
@@ -90,7 +87,8 @@ public class Main extends Application {
                 wang.drop(HEIGHT);
             }
         }); */
-   
+
+        
         ps.initStyle(StageStyle.TRANSPARENT);
         ps.setAlwaysOnTop(true);
         Scene scene = new Scene(pane, WIDTH, HEIGHT);
@@ -98,8 +96,6 @@ public class Main extends Application {
         ps.setTitle("DesktopWang");
         ps.setScene(scene);
         ps.show();
-
         wang.requestFocus();
-        // SCQ.requestFocus();
     }
 }
