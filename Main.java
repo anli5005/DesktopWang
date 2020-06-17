@@ -12,8 +12,6 @@ import javafx.stage.Screen;
 
 public class Main extends Application {
 
-    public static double clickCount = 0;
-
     @Override
     public void start(Stage ps) {
 
