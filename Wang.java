@@ -102,20 +102,20 @@ public class Wang extends Pane {
         int randY;
         int randChoice = rand.nextInt(30);
         //System.out.println(randChoice);
-        if (randChoice != 7 && randChoice != 8 && randChoice != 9 && randChoice != 10 && randChoice != 11) {
-            if (randChoice < 3) {
+        if (randChoice != 8 && randChoice != 9 && randChoice != 10 && randChoice != 11 && randChoice != 12) {
+            if (randChoice < 4) {
                 
                 new Images(WIDTH,HEIGHT);
                 ps.toFront();
             }
 
-            else if (randChoice == 4) {
+            else if (randChoice == 5) {
                 
                 new Videos(WIDTH,HEIGHT);
                 ps.toFront();
             }
 
-            else if (randChoice == 5 || randChoice == 6)  {
+            else if (randChoice == 6 || randChoice == 7)  {
                 sound();
             }
             
@@ -152,7 +152,7 @@ public class Wang extends Pane {
             pt.setOnFinished(e -> wander());
         } 
 
-        else if (randChoice == 7) {
+        else if (randChoice == 8) {
 
             if (!shadowClone)
                 shadowClone(WIDTH / 2.75 / 620 * 100, HEIGHT / 781 * 100);
@@ -162,7 +162,7 @@ public class Wang extends Pane {
             }
         }
 
-        else if (randChoice == 8 || randChoice == 9 || randChoice == 10) {
+        else if (randChoice == 9 || randChoice == 10 || randChoice == 11) {
             
             if (shadowClone) 
                 removeShadowClone();
@@ -170,7 +170,7 @@ public class Wang extends Pane {
                 wander();
         }
 
-        else if (randChoice == 11) 
+        else if (randChoice == 12) 
             avatar();
         
 
