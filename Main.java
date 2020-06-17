@@ -73,8 +73,7 @@ public class Main extends Application {
             if ((e.getCode() == KeyCode.E) || (e.getCode() == KeyCode.ESCAPE)) {
                 System.exit(0);
             } if (e.getText().equals("1")) {
-                new Images(WIDTH,HEIGHT);
-                ps.toFront();
+                wang.sound();
             }
 
         });
