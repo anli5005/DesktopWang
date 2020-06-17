@@ -275,7 +275,7 @@ public class Wang extends Pane {
         Random rand = new Random();
         int upperBound = new File("asmr").listFiles().length;
 
-        AudioClip sound = new AudioClip(this.getClass().getResource("asmr/" + (rand.nextInt(upperBound) + 1) + ".m4a").toString());
+        AudioClip sound = new AudioClip(this.getClass().getResource("asmr/" + (rand.nextInt(upperBound) + 1) + ".mp3").toString());
         sound.play();
         //activate();
     }
