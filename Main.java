@@ -46,7 +46,7 @@ public class Main extends Application {
 
         });
 
-        pane.setOnMouseMoved(e -> {
+        pane.setOnMouseClicked(e -> {
             try {
                 wang.captureMouse(e.getX(), e.getY());
             } catch (AWTException e1) {
