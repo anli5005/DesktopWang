@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 class Images {
@@ -12,7 +13,6 @@ class Images {
     Images(double x,double y) {
         Random rand = new Random();
         int upperBound = new File("theStash").listFiles().length;
-
         Stage subStage = new Stage();
         subStage.setTitle("The Stash");
         
@@ -24,6 +24,7 @@ class Images {
         double hig = img.getHeight();
 
         ImageView imgV = new ImageView(img);
+        
 
         if (wid < 1000) {
             imgV.setFitHeight(hig/1.5);
@@ -42,7 +43,6 @@ class Images {
         
         subStage.setX(rand.nextInt((int) (x)));
         subStage.setX(rand.nextInt((int) (y)));
-
         Scene scene = new Scene(root);
         subStage.setAlwaysOnTop(true);
         subStage.setScene(scene);

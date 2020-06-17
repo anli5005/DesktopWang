@@ -4,15 +4,14 @@ import java.security.Key;
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.stage.Popup;
+import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import sun.awt.WindowClosingListener;
+import javafx.stage.Modality;
+//import sun.awt.WindowClosingListener;
 import javafx.stage.Screen;
 
 public class Main extends Application {
@@ -22,14 +21,8 @@ public class Main extends Application {
     @Override
     public void start(Stage ps) {
 
-        // showInformationDialog();
         Pane pane = new Pane();
-
-        /*
-         * Label label = new Label("path2fx"); Popup popup = new Popup();
-         * popup.getContent().add(label);
-         */
-
+        
         Rectangle2D screenBounds = Screen.getPrimary().getBounds();
         final double WIDTH = screenBounds.getWidth();
         final double HEIGHT = screenBounds.getHeight();
@@ -37,17 +30,16 @@ public class Main extends Application {
         final double hig = HEIGHT / 781 * 100;
 
         Wang wang = new Wang(wid, hig);
-        // StateCapitalQuiz SCQ = new StateCapitalQuiz();
-        // bPane.setTop(SCQ);
-
+        
+        wang.start(WIDTH,HEIGHT, ps);
         pane.getChildren().add(wang);
 
-        wang.start(WIDTH, HEIGHT);
+        //wang.wander();
 
         wang.walk(700);
-        // wang.activate();
-        wang.wander();
+        //wang.wander();
 
+        
         pane.setOnMouseDragged(e -> {
 
             wang.follow(e.getX(), e.getY());
@@ -77,20 +69,14 @@ public class Main extends Application {
             } else if (e.getCode() == KeyCode.RIGHT) {
                 if (wang.animate(4) == 2) {
                     new Images(WIDTH,HEIGHT);
-                }
-            } */
+3            } */
             if ((e.getCode() == KeyCode.E) || (e.getCode() == KeyCode.ESCAPE)) {
                 System.exit(0);
-            }if (e.getText().equals("1")) {
+            } if (e.getText().equals("1")) {
                 wang.sound();
-            } if (e.getText().equals("2")) {
-                //popup.show(ps);
-            } if (e.getText().equals("3")) {
-                wang.wander();
             }
-            
-        });
 
+        });
 
         /*pane.setOnMouseClicked(e -> {
             clickCount++;
@@ -100,7 +86,8 @@ public class Main extends Application {
                 wang.drop(HEIGHT);
             }
         }); */
-   
+
+        
         ps.initStyle(StageStyle.TRANSPARENT);
         ps.setAlwaysOnTop(true);
         Scene scene = new Scene(pane, WIDTH, HEIGHT);
@@ -108,8 +95,6 @@ public class Main extends Application {
         ps.setTitle("DesktopWang");
         ps.setScene(scene);
         ps.show();
-
         wang.requestFocus();
-        // SCQ.requestFocus();
     }
 }

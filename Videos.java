@@ -36,6 +36,4 @@ class Videos {
         subStage.setTitle("Im sorry if this is a Rick Roll");  
         subStage.show();  
     }  
-    
-
 }

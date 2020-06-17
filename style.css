@@ -1,0 +1,64 @@
+.btn {
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  padding: 12px 30px;
+  cursor: pointer;
+  font-size: 20px;
+}
+body {
+  background-color: #3e567d;
+  color: #a8c9ff;
+  text-align: center;
+  padding-left: 10%;
+  padding-right: 10%;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+}
+.contac {
+  width: 33.33%;
+  float: center;
+  margin-right: 50px;
+  margin-left: 50px;
+  text-shadow: 10px black;
+}
+h1{
+  font-size: 70px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+h3{
+  margin-top: 0px;
+}
+
+h2{
+  text-shadow: 2px 2px 4px #000;
+}
+
+.btn:hover {
+  background-color: RoyalBlue;
+}
+
+.contact{
+  display:inline-flex;
+  margin-bottom: 10%;
+}
+
+.info{
+  margin-bottom: 4%;
+}
+
+.pfp{
+  border: 10px solid #a8c9ff;
+}
+
+.top{
+  text-align: center;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px #000;
+}
+
+.download{
+  text-align: center;
+  margin-bottom: 70px;
+}
